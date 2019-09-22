@@ -1,6 +1,6 @@
 #include "darkcyantower.h"
-#include "game.h"
 
+#include "game.h"
 extern Game * game;
 
 DarkCyanTower::DarkCyanTower()
