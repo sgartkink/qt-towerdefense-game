@@ -23,8 +23,6 @@ void Map::createAndAddEffectToScene()
 {
     effect = new ChosenHexEffect();
     effect->setPos(activeHex->x(), activeHex->y());
-    effect->setRect(HEX_EFFECT_STARTING_POSITION, HEX_EFFECT_STARTING_POSITION,
-                    HEX_EFFECT_STARTING_SIZE, HEX_EFFECT_STARTING_SIZE);
     scene->addItem(effect);
 }
 

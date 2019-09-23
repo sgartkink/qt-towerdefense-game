@@ -6,11 +6,8 @@
 const int MAP_SIZE = 8;
 
 const int HEX_SIZE = 40;
-const int BULLET_SIZE = 10;
-const int ENEMY_SIZE = 20;
-
-const int HEX_EFFECT_STARTING_POSITION = 15;
-const int HEX_EFFECT_STARTING_SIZE = 10;
+const int BULLET_SIZE = HEX_SIZE/4;
+const int ENEMY_SIZE = HEX_SIZE/2;
 
 const int BLUE_TOWER_NR = 0;
 const int GREEN_TOWER_NR = 1;

@@ -1,20 +1,5 @@
 #include "chosenhexeffect.h"
 
-void ChosenHexEffect::changeRect()
-{
-    if (currentEllipseSize > MAX_ELLIPSE_SIZE)
-        currentEllipseSize = HEX_EFFECT_STARTING_SIZE;
-    else
-        currentEllipseSize++;
-
-    if (currentEllipsePosition < HEX_EFFECT_STARTING_POSITION - MAX_DIFFERENCE_STARTING_CURRENT_POS)
-        currentEllipsePosition = HEX_EFFECT_STARTING_POSITION;
-    else
-        currentEllipsePosition -= 0.5;
-
-    setRect(currentEllipsePosition, currentEllipsePosition, currentEllipseSize, currentEllipseSize);
-}
-
 ChosenHexEffect::ChosenHexEffect()
 {
     QPen pen(EFFECT_PEN_COLOR);
@@ -23,6 +8,30 @@ ChosenHexEffect::ChosenHexEffect()
     connect(timerForChangeRect, SIGNAL(timeout()), this, SLOT(changeRect()));
 
     timerForChangeRect->start(50);
+}
+
+void ChosenHexEffect::changeRect()
+{
+    updateSize();
+    updatePos();
+
+    setRect(currentEllipsePosition, currentEllipsePosition, currentEllipseSize, currentEllipseSize);
+}
+
+void ChosenHexEffect::updateSize()
+{
+    if (currentEllipseSize > MAX_ELLIPSE_SIZE)
+        currentEllipseSize = HEX_EFFECT_STARTING_SIZE;
+    else
+        currentEllipseSize += INCREASING_SPEED;
+}
+
+void ChosenHexEffect::updatePos()
+{
+    if (currentEllipsePosition < MIN_ELLIPSE_POS)
+        currentEllipsePosition = HEX_EFFECT_STARTING_POSITION;
+    else
+        currentEllipsePosition -= INCREASING_SPEED/2;
 }
 
 ChosenHexEffect::~ChosenHexEffect()

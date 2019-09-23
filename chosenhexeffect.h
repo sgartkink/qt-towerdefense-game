@@ -8,22 +8,25 @@
 
 #include "global_consts.h"
 
-/**
- * TODO:
- * 1. hex effect size and position is basing on the hex size
- */
-
 class ChosenHexEffect : public QObject, public QGraphicsEllipseItem
 {
     Q_OBJECT
 private:
-    const qreal MAX_ELLIPSE_SIZE = 50;
-    const qreal MAX_DIFFERENCE_STARTING_CURRENT_POS = 20;
+    const qreal MAX_ELLIPSE_SIZE = HEX_SIZE + HEX_SIZE/4;
+    const qreal HEX_EFFECT_STARTING_SIZE = MAX_ELLIPSE_SIZE - HEX_SIZE;
 
-    qreal currentEllipsePosition = HEX_EFFECT_STARTING_POSITION;
+    const qreal HEX_EFFECT_STARTING_POSITION = HEX_SIZE/2 - HEX_EFFECT_STARTING_SIZE/2;
+    const qreal MIN_ELLIPSE_POS = HEX_EFFECT_STARTING_POSITION - HEX_SIZE/2;
+
+    const qreal INCREASING_SPEED = 1;
+
     qreal currentEllipseSize = HEX_EFFECT_STARTING_SIZE;
+    qreal currentEllipsePosition = HEX_EFFECT_STARTING_POSITION;
 
     QTimer * timerForChangeRect = new QTimer(this);
+
+    void updateSize();
+    void updatePos();
 
 private slots:
     void changeRect();
