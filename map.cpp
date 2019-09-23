@@ -19,6 +19,55 @@ Map::Map()
     setLayout(layout);
 }
 
+void Map::createAllHexesAndAddToScene()
+{
+    vectorAllHexes.resize(MAP_SIZE);
+
+    //offset coordinate system
+    for (int y = 0; y < MAP_SIZE; y++)
+        for (int x = 0; x < MAP_SIZE; x++)
+        {
+            Hex * hex = new Hex(x, y);
+            hex->setFlag(QGraphicsItem::ItemIsFocusable);
+            hex->setPos(
+                        HEX_SIZE*sqrt(3)*x + HEX_SIZE/2*sqrt(3)*(y%2),
+                        HEX_SIZE*1.5*y
+                        );
+
+            vectorAllHexes[y].append(hex);
+            scene->addItem(hex);
+        }
+}
+
+void Map::hexWasClicked(Hex *h)
+{
+    if (activeHex)
+        if (activeHex->hasTower())
+            paintHexesInTowerRange(HEX_NORMAL_COLOR, false);
+
+    if (activeHex != h)
+    {
+        deleteAndRemoveEffectFromScene();
+        activeHex = h;
+        createAndAddEffectToScene();
+    }
+
+    if (activeHex->hasTower())
+        paintHexesInTowerRange(HEX_IN_TOWER_RANGE_COLOR, true);
+
+    game->interfaceOnTheRightSide->showTowerButtons();
+
+    if (!isPathCreated)
+    {
+        setPathForEnemy();
+        isPathCreated = true;
+    }
+
+    Enemy * enemy = new Enemy(pathForEnemy->getPoints());
+    scene->addItem(enemy);
+    vectorAllEnemies.append(enemy);
+}
+
 void Map::createAndAddEffectToScene()
 {
     effect = new ChosenHexEffect();
@@ -65,58 +114,9 @@ unsigned int Map::distaneBetweenTwoHexes(Hex *a, Hex *b)
     return (abs(a->getXAxial() - b->getXAxial()) + abs(a->getY() - b->getY()) + abs(a->getZ() - b->getZ())) / 2;
 }
 
-void Map::createAllHexesAndAddToScene()
-{
-    vectorAllHexes.resize(MAP_SIZE);
-
-    //offset coordinate system
-    for (int y = 0; y < MAP_SIZE; y++)
-        for (int x = 0; x < MAP_SIZE; x++)
-        {
-            Hex * hex = new Hex(x, y);
-            hex->setFlag(QGraphicsItem::ItemIsFocusable);
-            hex->setPos(
-                        HEX_SIZE*sqrt(3)*x + HEX_SIZE/2*sqrt(3)*(y%2),
-                        HEX_SIZE*1.5*y
-                        );
-
-            vectorAllHexes[y].append(hex);
-            scene->addItem(hex);
-        }
-}
-
 void Map::setPathForEnemy()
 {
     pathForEnemy = new PathForEnemy();
-}
-
-void Map::hexWasClicked(Hex *h)
-{
-    if (activeHex)
-        if (activeHex->hasTower())
-            paintHexesInTowerRange(HEX_NORMAL_COLOR, false);
-
-    if (activeHex != h)
-    {
-        deleteAndRemoveEffectFromScene();
-        activeHex = h;
-        createAndAddEffectToScene();
-    }
-
-    if (activeHex->hasTower())
-        paintHexesInTowerRange(HEX_IN_TOWER_RANGE_COLOR, true);
-
-    game->interfaceOnTheRightSide->showTowerButtons();
-
-    if (!isPathCreated)
-    {
-        setPathForEnemy();
-        isPathCreated = true;
-    }
-
-    Enemy * enemy = new Enemy(pathForEnemy->getPoints());
-    scene->addItem(enemy);
-    vectorAllEnemies.append(enemy);
 }
 
 void Map::createTower(int nr)
@@ -139,9 +139,9 @@ void Map::createTower(int nr)
         default: tower = new GreenTower();
         }
         tower->setPos(activeHex->x(), activeHex->y());
-        scene->addItem(tower);
         tower->setParentHex(activeHex);
         vectorAllTowers.append(tower);
+        scene->addItem(tower);
 
         activeHex->setHasTower(true);
         activeHex->setTower(tower);

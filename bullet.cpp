@@ -12,7 +12,7 @@ Bullet::Bullet(Qt::GlobalColor color, Enemy *e)
     setPen(pen);
 
     connect(timerForCheckingAim, SIGNAL(timeout()), this, SLOT(checkExistenceOfAim()));
-    timerForCheckingAim->start(150);
+    timerForCheckingAim->start(50);
 }
 
 void Bullet::checkExistenceOfAim()

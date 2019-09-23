@@ -25,7 +25,7 @@
  * 1. check collidings works but it needs a lot of optimalization
  * range for each tower should be calculated once
  * it should be done in class TowerRangeAttack
- * 2. path for enemy is created only one
+ * 2. path for enemy is created only ones
  * and it's not controlled by a bool variable
  */
 

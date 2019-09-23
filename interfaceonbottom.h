@@ -10,6 +10,7 @@ class InterfaceOnBottom : public QWidget
 private:
     QVBoxLayout * vLayout;
     QPushButton * button = new QPushButton();
+
 public:
     InterfaceOnBottom();
 };

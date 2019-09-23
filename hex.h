@@ -38,8 +38,8 @@ public:
     unsigned int getTowerAttackRange() const { return tower->getAttackRange(); }
     bool hasTower() const { return isTower; }
 
-    void setHasTower(bool t) { isTower = t; }
     void setInRangeChosenHexWithTower(bool b) { inRangeChosenHexWithTower = b; }
+    void setHasTower(bool t) { isTower = t; }
     void setTower(Tower * t) { tower = t; }
 
     void changeHexBrushAndUpdate(Qt::GlobalColor color);

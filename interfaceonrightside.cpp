@@ -1,22 +1,7 @@
 #include "interfaceonrightside.h"
+
 #include "game.h"
-
 extern Game * game;
-
-void InterfaceOnRightSide::createButton(QPushButton *button)
-{
-    button->setVisible(false);
-    vLayout->addWidget(button);
-}
-
-void InterfaceOnRightSide::changeButtonsVisible(bool v)
-{
-    buttonBlueTower->setVisible(v);
-    buttonGreenTower->setVisible(v);
-    buttonDarkCyanTower->setVisible(v);
-    buttonWhiteTower->setVisible(v);
-    buttonYellowTower->setVisible(v);
-}
 
 InterfaceOnRightSide::InterfaceOnRightSide()
 {
@@ -36,6 +21,21 @@ InterfaceOnRightSide::InterfaceOnRightSide()
     createButton(buttonDarkCyanTower);
     createButton(buttonWhiteTower);
     createButton(buttonYellowTower);
+}
+
+void InterfaceOnRightSide::createButton(QPushButton *button)
+{
+    button->setVisible(false);
+    vLayout->addWidget(button);
+}
+
+void InterfaceOnRightSide::changeButtonsVisible(bool visibility)
+{
+    buttonBlueTower->setVisible(visibility);
+    buttonGreenTower->setVisible(visibility);
+    buttonDarkCyanTower->setVisible(visibility);
+    buttonWhiteTower->setVisible(visibility);
+    buttonYellowTower->setVisible(visibility);
 }
 
 void InterfaceOnRightSide::showTowerButtons()

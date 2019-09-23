@@ -20,7 +20,7 @@ private:
     QLabel * text;
 
     void createButton(QPushButton * button);
-    void changeButtonsVisible(bool v);
+    void changeButtonsVisible(bool visibility);
 
 public:
     InterfaceOnRightSide();

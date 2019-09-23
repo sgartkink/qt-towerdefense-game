@@ -9,6 +9,12 @@
 #include <QTimer>
 #include <QtMath>
 
+/**
+ * TODO:
+ * 1. the enemy's position is always in the middle of the hex
+ * regardless of the hex size
+ */
+
 class Enemy : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
