@@ -1,7 +1,7 @@
 #include "yellowbullet.h"
 
-YellowBullet::YellowBullet(Enemy *aimEnemy)
-    : Bullet(Qt::yellow, aimEnemy)
+YellowBullet::YellowBullet(Enemy *aimEnemy, unsigned int damage)
+    : Bullet(Qt::yellow, aimEnemy, damage)
 {
 
 }

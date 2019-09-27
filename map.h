@@ -62,6 +62,8 @@ public:
     void setPathForEnemy();
     void hexWasClicked(Hex * h);
 
+    Hex * getActiveHex() { return activeHex; }
+
 public slots:
     void createTower(int nr);
     void checkCollidings();

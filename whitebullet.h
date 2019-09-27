@@ -6,7 +6,7 @@
 class WhiteBullet : public Bullet
 {
 public:
-    WhiteBullet(Enemy *aimEnemy);
+    WhiteBullet(Enemy *aimEnemy, unsigned int damage);
 };
 
 #endif // WHITEBULLET_H

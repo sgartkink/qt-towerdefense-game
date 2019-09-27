@@ -20,7 +20,7 @@ private:
     Enemy * aim;
     QLineF lineFromBulletToAim;
     QTimer * timerForCheckingAim = new QTimer(this);
-    int damage = 5;
+    unsigned int damage;
 
     void moveBulletTowardsAim();
     void rotateToAim();
@@ -31,7 +31,7 @@ private slots:
     void checkExistenceOfAim();
 
 public:
-    Bullet(Qt::GlobalColor color, Enemy *e);
+    Bullet(Qt::GlobalColor color, Enemy *e, unsigned int damage_);
 };
 
 #endif // BULLET_H

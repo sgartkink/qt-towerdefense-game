@@ -6,7 +6,7 @@
 class YellowBullet : public Bullet
 {
 public:
-    YellowBullet(Enemy *aimEnemy);
+    YellowBullet(Enemy *aimEnemy, unsigned int damage);
 };
 
 #endif // YELLOWBULLET_H

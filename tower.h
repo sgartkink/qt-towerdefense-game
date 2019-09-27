@@ -3,6 +3,7 @@
 
 #include <QGraphicsRectItem>
 #include <QPen>
+#include <QObject>
 
 #include "global_consts.h"
 #include "bullet.h"
@@ -11,15 +12,18 @@
 
 class Hex;
 
-class Tower : public QGraphicsRectItem
+class Tower : public QObject, public QGraphicsRectItem
 {
+    Q_OBJECT
 private:
-    QPen pen;
+    QPen penTower;
     QVector<Hex*> vectorHexesInRange;
     Hex * parentHex;
 
 protected:
+    short currentLevel = 1;
     const unsigned int attackRange;
+    QVector<unsigned int> damage;
     TowerRangeAttack * towerRangeAttack;
 
     void setBulletPosAndAddToScene(Bullet * bullet);
@@ -28,13 +32,18 @@ public:
     Tower(unsigned int range, Qt::GlobalColor color);
 
     unsigned int getAttackRange() const { return attackRange; }
+    unsigned int getDamage() { return damage[currentLevel-1]; }
     QVector<Hex*> getVectorHexesInRange() { return vectorHexesInRange; }
     Hex * getParentHex() { return parentHex; }
+    short getCurrentLevel() { return currentLevel; }
 
     void fillVectorHexesInRange(QVector<Hex*> v) { vectorHexesInRange = v; }
     void setParentHex(Hex * h) { parentHex = h; }
 
     virtual void enemyTargeted(Enemy *e) = 0;
+
+public slots:
+    void increaseLevel() { currentLevel++; }
 };
 
 #endif // TOWER_H

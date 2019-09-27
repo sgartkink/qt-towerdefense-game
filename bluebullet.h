@@ -6,7 +6,7 @@
 class BlueBullet : public Bullet
 {
 public:
-    BlueBullet(Enemy *aimEnemy);
+    BlueBullet(Enemy *aimEnemy, unsigned int damage);
 };
 
 #endif // BLUEBULLET_H

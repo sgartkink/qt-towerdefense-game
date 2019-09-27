@@ -46,7 +46,11 @@ SOURCES += \
     yellowbullet.cpp \
     enemy.cpp \
     towerrangeattack.cpp \
-    pathforenemy.cpp
+    pathforenemy.cpp \
+    widgettoweroptions.cpp \
+    interfacewithtoweroptions.cpp \
+    interfacewaitforclickhex.cpp \
+    interfacetowerdetails.cpp
 
 HEADERS += \
     hex.h \
@@ -70,7 +74,12 @@ HEADERS += \
     yellowbullet.h \
     enemy.h \
     towerrangeattack.h \
-    pathforenemy.h
+    pathforenemy.h \
+    widgettoweroptions.h \
+    interfacewithtoweroptions.h \
+    interfacewaitforclickhex.h \
+    interfacetowerdetails.h \
+    towers_prices.h
 
 FORMS +=
 

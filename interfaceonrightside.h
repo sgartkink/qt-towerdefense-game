@@ -1,33 +1,30 @@
 #ifndef INTERFACEONRIGHTSIDE_H
 #define INTERFACEONRIGHTSIDE_H
 
-#include <QWidget>
+#include <QStackedWidget>
 #include <QPushButton>
 #include <QLabel>
 #include <QVBoxLayout>
 
 #include "hex.h"
+#include "interfacewaitforclickhex.h"
+#include "interfacewithtoweroptions.h"
+#include "interfacetowerdetails.h"
 
-class InterfaceOnRightSide : public QWidget
+class InterfaceOnRightSide : public QStackedWidget
 {
 private:
-    QVBoxLayout * vLayout;
-    QPushButton * buttonBlueTower = new QPushButton("Add blue tower");
-    QPushButton * buttonGreenTower = new QPushButton("Add green tower");
-    QPushButton * buttonDarkCyanTower = new QPushButton("Add dark cyan tower");
-    QPushButton * buttonWhiteTower = new QPushButton("Add white tower");
-    QPushButton * buttonYellowTower = new QPushButton("Add yellow tower");
-    QLabel * text;
-
-    void createButton(QPushButton * button);
-    void changeButtonsVisible(bool visibility);
+    InterfaceWaitForClickHex * interfaceWaitForClickHex = new InterfaceWaitForClickHex();
+    InterfaceWithTowerOptions * interfaceWithTowerOptions = new InterfaceWithTowerOptions();
+    InterfaceTowerDetails * interfaceTowerDetails = new InterfaceTowerDetails();
 
 public:
     InterfaceOnRightSide();
 
-    void showTowerButtons();
-    void hideTowerButtons();
+    void setInterface(unsigned short interface) { setCurrentIndex(interface); }
     void setAllConnects();
+
+    InterfaceTowerDetails * getInterfaceWithTowerDetails() { return interfaceTowerDetails; }
 };
 
 #endif // INTERFACEONRIGHTSIDE_H

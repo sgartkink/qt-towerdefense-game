@@ -12,7 +12,7 @@ void Tower::setBulletPosAndAddToScene(Bullet *bullet)
 Tower::Tower(unsigned int range, Qt::GlobalColor color)
     : attackRange(range)
 {
-    pen.setColor(color);
-    setPen(pen);
+    penTower.setColor(color);
+    setPen(penTower);
     setRect(0, 0, HEX_SIZE, HEX_SIZE);
 }

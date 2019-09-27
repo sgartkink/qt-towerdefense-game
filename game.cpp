@@ -19,7 +19,6 @@ Game::Game()
 
 void Game::configureLayout()
 {
-    gridLayout = new QGridLayout();
     gridLayout->setSpacing(0);
     gridLayout->setMargin(0);
     gridLayout->setColumnMinimumWidth(0,750);

@@ -31,6 +31,7 @@ public:
     Hex(int x, int y, QGraphicsItem * parent = nullptr);
     ~Hex() {}
 
+    Tower * getTower() const { return tower; }
     int getXOffset() const { return xOffset; }
     int getXAxial() const { return xAxial; }
     int getY() const { return yCord; }

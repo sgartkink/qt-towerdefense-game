@@ -1,7 +1,7 @@
 #include "bullet.h"
 
-Bullet::Bullet(Qt::GlobalColor color, Enemy *e)
-    : aim(e)
+Bullet::Bullet(Qt::GlobalColor color, Enemy *e, unsigned int damage_)
+    : aim(e), damage(damage_)
 {   
     setRect(0, 0, BULLET_SIZE, BULLET_SIZE);
 

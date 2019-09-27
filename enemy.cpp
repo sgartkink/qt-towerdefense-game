@@ -8,7 +8,7 @@ int Enemy::enemyCount = 0;
 Enemy::Enemy(QList<QPointF> pathPoints_)
     : pathPoints(pathPoints_)
 {
-    setRect(0, -10, ENEMY_SIZE, ENEMY_SIZE);
+    setRect(0, -ENEMY_SIZE/2, ENEMY_SIZE, ENEMY_SIZE);
 
     QBrush brush(ENEMY_COLOR);
     setBrush(brush);
@@ -64,7 +64,7 @@ void Enemy::setNewDestPointAndRotate()
     rotateToPoint();
 }
 
-void Enemy::reduceHP(int reduction)
+void Enemy::reduceHP(unsigned int reduction)
 {
     hp -= reduction;
 

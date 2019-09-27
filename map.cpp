@@ -53,9 +53,13 @@ void Map::hexWasClicked(Hex *h)
     }
 
     if (activeHex->hasTower())
+    {
         paintHexesInTowerRange(HEX_IN_TOWER_RANGE_COLOR, true);
-
-    game->interfaceOnTheRightSide->showTowerButtons();
+        game->interfaceOnTheRightSide->getInterfaceWithTowerDetails()->setActiveTower(activeHex->getTower());
+        game->interfaceOnTheRightSide->setInterface(INTERFACE_TOWER_DETAILS);
+    }
+    else
+        game->interfaceOnTheRightSide->setInterface(INTERFACE_WITH_TOWER_OPTIONS_NR);
 
     if (!isPathCreated)
     {
@@ -63,9 +67,9 @@ void Map::hexWasClicked(Hex *h)
         isPathCreated = true;
     }
 
-    Enemy * enemy = new Enemy(pathForEnemy->getPoints());
-    scene->addItem(enemy);
-    vectorAllEnemies.append(enemy);
+//    Enemy * enemy = new Enemy(pathForEnemy->getPoints());
+//    scene->addItem(enemy);
+//    vectorAllEnemies.append(enemy);
 }
 
 void Map::createAndAddEffectToScene()
@@ -99,7 +103,7 @@ void Map::paintHexesInTowerRange(Qt::GlobalColor color, bool inRange)
 
 void Map::mousePressEvent(QMouseEvent *event)
 {
-    game->interfaceOnTheRightSide->hideTowerButtons();
+    game->interfaceOnTheRightSide->setInterface(INTERFACE_WAIT_FOR_CLICK_HEX_NR);
     if (activeHex)
     {
         if (activeHex->hasTower())
@@ -151,6 +155,9 @@ void Map::createTower(int nr)
         QTimer * collisionTimer = new QTimer;
         connect(collisionTimer, SIGNAL(timeout()), this, SLOT(checkCollidings()));
         collisionTimer->start(150);
+
+        game->interfaceOnTheRightSide->getInterfaceWithTowerDetails()->setActiveTower(activeHex->getTower());
+        game->interfaceOnTheRightSide->setInterface(INTERFACE_TOWER_DETAILS);
     }
 }
 

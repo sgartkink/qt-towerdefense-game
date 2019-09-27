@@ -16,10 +16,10 @@ private:
     void configureLayout();
 
 public:
-    QGridLayout * gridLayout;
-    Map * map;
-    InterfaceOnRightSide * interfaceOnTheRightSide;
-    InterfaceOnBottom * interfaceOnBottom;
+    QGridLayout * gridLayout = new QGridLayout;
+    Map * map = new Map();
+    InterfaceOnRightSide * interfaceOnTheRightSide = new InterfaceOnRightSide;
+    InterfaceOnBottom * interfaceOnBottom = new InterfaceOnBottom;
 
     Game();
 

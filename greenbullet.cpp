@@ -1,7 +1,7 @@
 #include "greenbullet.h"
 
-GreenBullet::GreenBullet(Enemy *aimEnemy)
-    : Bullet(Qt::green, aimEnemy)
+GreenBullet::GreenBullet(Enemy *aimEnemy, unsigned int damage)
+    : Bullet(Qt::green, aimEnemy, damage)
 {
 
 }

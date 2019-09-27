@@ -45,7 +45,7 @@ public:
     int getNr() { return nr; }
     int getHp() const { return hp; }
 
-    void reduceHP(int reduction);
+    void reduceHP(unsigned int reduction);
     void checkIfEnemyStillExists();
 };
 

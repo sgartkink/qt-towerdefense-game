@@ -6,7 +6,7 @@
 class DarkCyanBullet : public Bullet
 {
 public:
-    DarkCyanBullet(Enemy *aimEnemy);
+    DarkCyanBullet(Enemy *aimEnemy, unsigned int damage);
 };
 
 #endif // DARKCYANBULLET_H

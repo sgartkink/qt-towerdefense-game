@@ -1,7 +1,7 @@
 #include "darkcyanbullet.h"
 
-DarkCyanBullet::DarkCyanBullet(Enemy *aimEnemy)
-    : Bullet(Qt::darkCyan, aimEnemy)
+DarkCyanBullet::DarkCyanBullet(Enemy *aimEnemy, unsigned int damage)
+    : Bullet(Qt::darkCyan, aimEnemy, damage)
 {
 
 }
