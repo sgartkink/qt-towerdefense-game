@@ -1,7 +1,7 @@
 #include "towerrangeattack.h"
 #include <QPen>
 #include <QPen>
-#include <QDebug>
+#include <QtDebug>
 TowerRangeAttack::TowerRangeAttack(unsigned int r, double x_, double y_)
     : range(r)
 {    

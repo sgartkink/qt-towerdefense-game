@@ -13,16 +13,19 @@ class InterfaceWithTowerOptions : public QWidget
 private:
     QVBoxLayout * vLayout = new QVBoxLayout();
 
-    WidgetTowerOptions * widgetBlueTowerOptions = new WidgetTowerOptions("Blue tower", BLUE_TOWER_PRICES[0]);
-    WidgetTowerOptions * widgetGreenTowerOptions = new WidgetTowerOptions("Green tower", GREEN_TOWER_PRICES[0]);
-    WidgetTowerOptions * widgetDarkCyanTowerOptions = new WidgetTowerOptions("Dark Cyan tower", DARK_CYAN_TOWER_PRICES[0]);
-    WidgetTowerOptions * widgetWhiteTowerOptions = new WidgetTowerOptions("White tower", WHITE_TOWER_PRICES[0]);
-    WidgetTowerOptions * widgetYellowTowerOptions = new WidgetTowerOptions("Yellow tower", YELLOW_TOWER_RRICES[0]);
+    WidgetTowerOptions * widgetBlueTowerOptions = new WidgetTowerOptions("Blue tower", VECTOR_TOWER_PRICES[BLUE_TOWER_PRICES_NR][0]);
+    WidgetTowerOptions * widgetGreenTowerOptions = new WidgetTowerOptions("Green tower", VECTOR_TOWER_PRICES[GREEN_TOWER_PRICES_NR][0]);
+    WidgetTowerOptions * widgetDarkCyanTowerOptions = new WidgetTowerOptions("Dark Cyan tower", VECTOR_TOWER_PRICES[DARK_CYAN_TOWER_PRICES_NR][0]);
+    WidgetTowerOptions * widgetWhiteTowerOptions = new WidgetTowerOptions("White tower", VECTOR_TOWER_PRICES[WHITE_TOWER_PRICES_NR][0]);
+    WidgetTowerOptions * widgetYellowTowerOptions = new WidgetTowerOptions("Yellow tower", VECTOR_TOWER_PRICES[YELLOW_TOWER_PRICES_NR][0]);
 
 public:
     explicit InterfaceWithTowerOptions(QWidget *parent = nullptr);
 
     void setAllButtonConnects();
+
+public slots:
+    void updateButtons();
 };
 
 #endif // INTERFACEWITHTOWEROPTIONS_H

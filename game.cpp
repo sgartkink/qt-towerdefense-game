@@ -4,15 +4,10 @@ Game::Game()
 {
     configureLayout();
 
-    map = new Map();
     map->createAllHexesAndAddToScene();
     gridLayout->addWidget(map,0,0);
 
-    interfaceOnTheRightSide = new InterfaceOnRightSide();
-    gridLayout->addWidget(interfaceOnTheRightSide,0,1);
 
-    interfaceOnBottom = new InterfaceOnBottom();
-    gridLayout->addWidget(interfaceOnBottom,1,0,1,2);
 
     setLayout(gridLayout);
 }
@@ -30,4 +25,13 @@ void Game::configureLayout()
 void Game::setAllConnects()
 {
     interfaceOnTheRightSide->setAllConnects();
+}
+
+void Game::configureInterfaces()
+{
+    interfaceOnTheRightSide = new InterfaceOnRightSide();
+    gridLayout->addWidget(interfaceOnTheRightSide,0,1);
+
+    interfaceOnBottom = new InterfaceOnBottom();
+    gridLayout->addWidget(interfaceOnBottom,1,0,1,2);
 }

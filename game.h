@@ -9,6 +9,7 @@
 #include "map.h"
 #include "interfaceonbottom.h"
 #include "interfaceonrightside.h"
+#include "player.h"
 
 class Game : public QWidget
 {
@@ -16,14 +17,16 @@ private:
     void configureLayout();
 
 public:
-    QGridLayout * gridLayout = new QGridLayout;
+    QGridLayout * gridLayout = new QGridLayout();
     Map * map = new Map();
-    InterfaceOnRightSide * interfaceOnTheRightSide = new InterfaceOnRightSide;
-    InterfaceOnBottom * interfaceOnBottom = new InterfaceOnBottom;
+    Player * player = new Player();
+    InterfaceOnRightSide * interfaceOnTheRightSide;
+    InterfaceOnBottom * interfaceOnBottom;
 
     Game();
 
     void setAllConnects();
+    void configureInterfaces();
 };
 
 #endif // GAME_H

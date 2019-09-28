@@ -15,12 +15,15 @@ private:
     QLabel * textPRICE = new QLabel("Price:");
     QLCDNumber * qlcdPrice = new QLCDNumber(5);
     QPushButton * buyTowerButton = new QPushButton();
-    unsigned int towerPrice;
+
+    const unsigned int towerPrice;
 
 public:
     WidgetTowerOptions(QString towerName_, unsigned int towerPrice_);
 
     QPushButton * getButton() { return buyTowerButton; }
+
+    void updateButton();
 };
 
 #endif // WIDGETTOWEROPTIONS_H

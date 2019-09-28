@@ -1,7 +1,8 @@
 #include "hex.h"
-#include "game.h"
 
+#include "game.h"
 extern Game * game;
+
 Hex::Hex(int x_, int y_, QGraphicsItem * parent)
     : xOffset(x_), xAxial(offsetToAxial(x_, y_)), yCord(y_), zCord(-xAxial-y_)
 {

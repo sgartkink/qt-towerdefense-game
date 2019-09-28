@@ -50,7 +50,8 @@ SOURCES += \
     widgettoweroptions.cpp \
     interfacewithtoweroptions.cpp \
     interfacewaitforclickhex.cpp \
-    interfacetowerdetails.cpp
+    interfacetowerdetails.cpp \
+    player.cpp
 
 HEADERS += \
     hex.h \
@@ -79,7 +80,8 @@ HEADERS += \
     interfacewithtoweroptions.h \
     interfacewaitforclickhex.h \
     interfacetowerdetails.h \
-    towers_prices.h
+    towers_prices.h \
+    player.h
 
 FORMS +=
 

@@ -6,6 +6,7 @@
 #include <QObject>
 
 #include "global_consts.h"
+#include "towers_prices.h"
 #include "bullet.h"
 #include "towerrangeattack.h"
 #include "enemy.h"
@@ -33,6 +34,7 @@ public:
 
     unsigned int getAttackRange() const { return attackRange; }
     unsigned int getDamage() { return damage[currentLevel-1]; }
+    unsigned int getPrice(unsigned short vectorTowerPrices_NR) { return VECTOR_TOWER_PRICES[vectorTowerPrices_NR][currentLevel-1]; }
     QVector<Hex*> getVectorHexesInRange() { return vectorHexesInRange; }
     Hex * getParentHex() { return parentHex; }
     short getCurrentLevel() { return currentLevel; }
@@ -43,6 +45,7 @@ public:
     virtual void enemyTargeted(Enemy *e) = 0;
 
 public slots:
+    void increaseLevelAndReducePlayerMoney(unsigned short vectorTowerPrices_NR);
     void increaseLevel() { currentLevel++; }
 };
 

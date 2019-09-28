@@ -25,8 +25,10 @@ private:
     QLCDNumber * qlcdLevel = new QLCDNumber(5);
 
     Tower * activeTower = nullptr;
+    unsigned short vectorTowerPrices_NR;
 
-    void checkTowerColor();
+    void setTowerNameAndVectorPrices();
+    void checkTowerPriceDependsOnLevel();
 
 public:
     explicit InterfaceTowerDetails(QWidget *parent = nullptr);

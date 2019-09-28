@@ -16,3 +16,9 @@ Tower::Tower(unsigned int range, Qt::GlobalColor color)
     setPen(penTower);
     setRect(0, 0, HEX_SIZE, HEX_SIZE);
 }
+
+void Tower::increaseLevelAndReducePlayerMoney(unsigned short vectorTowerPrices_NR)
+{
+    currentLevel++;
+    game->player->decreaseMoney(getPrice(vectorTowerPrices_NR));
+}
