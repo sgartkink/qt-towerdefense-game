@@ -21,12 +21,6 @@ void InterfaceWithTowerOptions::setAllButtonConnects()
     connect(widgetWhiteTowerOptions->getButton(), &QPushButton::clicked, [](){ game->map->createTower(WHITE_TOWER_NR); });
     connect(widgetYellowTowerOptions->getButton(), &QPushButton::clicked, [](){ game->map->createTower(YELLOW_TOWER_NR); });
     connect(widgetDarkCyanTowerOptions->getButton(), &QPushButton::clicked, [](){ game->map->createTower(DARKCYAN_TOWER_NR); });
-
-    connect(widgetBlueTowerOptions->getButton(), SIGNAL(clicked()), this, SLOT(updateButtons()));
-    connect(widgetGreenTowerOptions->getButton(), SIGNAL(clicked()), this, SLOT(updateButtons()));
-    connect(widgetWhiteTowerOptions->getButton(), SIGNAL(clicked()), this, SLOT(updateButtons()));
-    connect(widgetYellowTowerOptions->getButton(), SIGNAL(clicked()), this, SLOT(updateButtons()));
-    connect(widgetDarkCyanTowerOptions->getButton(), SIGNAL(clicked()), this, SLOT(updateButtons()));
 }
 
 void InterfaceWithTowerOptions::updateButtons()

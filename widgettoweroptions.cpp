@@ -32,7 +32,5 @@ void WidgetTowerOptions::updateButton()
     buyTowerButton->setEnabled(true);
 
     if (game->player->getMoney() < towerPrice)
-    {
         buyTowerButton->setEnabled(false);
-    }
 }

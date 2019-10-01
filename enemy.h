@@ -9,12 +9,6 @@
 #include <QTimer>
 #include <QtMath>
 
-/**
- * TODO:
- * 1. the enemy's position is always in the middle of the hex
- * regardless of the hex size
- */
-
 class Enemy : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
@@ -25,6 +19,7 @@ private:
 
     int nr;
     int hp = 10;
+    unsigned int reward = 10;
     QList<QPointF> pathPoints;
     int pathPoints_index = 1; //because pathPoints[0] is (0,0)
     QPointF destPoint;
@@ -44,6 +39,7 @@ public:
 
     int getNr() { return nr; }
     int getHp() const { return hp; }
+    unsigned int getReward() const { return reward; }
 
     void reduceHP(unsigned int reduction);
     void checkIfEnemyStillExists();

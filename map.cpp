@@ -55,7 +55,7 @@ void Map::hexWasClicked(Hex *h)
     if (activeHex->hasTower())
     {
         paintHexesInTowerRange(HEX_IN_TOWER_RANGE_COLOR, true);
-        game->interfaceOnTheRightSide->getInterfaceWithTowerDetails()->setActiveTower(activeHex->getTower());
+        game->interfaceOnTheRightSide->getInterfaceTowerDetails()->setActiveTower(activeHex->getTower());
         game->interfaceOnTheRightSide->setInterface(INTERFACE_TOWER_DETAILS);
     }
     else
@@ -67,9 +67,9 @@ void Map::hexWasClicked(Hex *h)
         isPathCreated = true;
     }
 
-//    Enemy * enemy = new Enemy(pathForEnemy->getPoints());
-//    scene->addItem(enemy);
-//    vectorAllEnemies.append(enemy);
+    Enemy * enemy = new Enemy(pathForEnemy->getPoints());
+    scene->addItem(enemy);
+    vectorAllEnemies.append(enemy);
 }
 
 void Map::createAndAddEffectToScene()
@@ -156,7 +156,7 @@ void Map::createTower(int nr)
         connect(collisionTimer, SIGNAL(timeout()), this, SLOT(checkCollidings()));
         collisionTimer->start(150);
 
-        game->interfaceOnTheRightSide->getInterfaceWithTowerDetails()->setActiveTower(activeHex->getTower());
+        game->interfaceOnTheRightSide->getInterfaceTowerDetails()->setActiveTower(activeHex->getTower());
         game->interfaceOnTheRightSide->setInterface(INTERFACE_TOWER_DETAILS);
     }
 }

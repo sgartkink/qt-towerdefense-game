@@ -1,5 +1,8 @@
 #include "bullet.h"
 
+#include "game.h"
+extern Game * game;
+
 Bullet::Bullet(Qt::GlobalColor color, Enemy *e, unsigned int damage_)
     : aim(e), damage(damage_)
 {   
@@ -52,6 +55,7 @@ void Bullet::checkIfBulletIsCloseEnoughAim()
 {
     if (lineFromBulletToAim.length() < 10)
     {
+        game->player->increaseMoney(aim->getReward());
         aim->reduceHP(damage);
         timerForCheckingAim->stop();
         delete this;

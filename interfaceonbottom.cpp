@@ -1,6 +1,6 @@
 #include "interfaceonbottom.h"
-#include "game.h"
 
+#include "game.h"
 extern Game * game;
 
 InterfaceOnBottom::InterfaceOnBottom()
@@ -9,8 +9,15 @@ InterfaceOnBottom::InterfaceOnBottom()
     vLayout->setMargin(0);
     vLayout->setSpacing(0);
 
-    button = new QPushButton("sadasdasdasd");
-    vLayout->addWidget(button);
+    vLayout->addWidget(textMoney);
+
+    updateMoney();
+    vLayout->addWidget(qlcdMoney);
 
     setLayout(vLayout);
+}
+
+void InterfaceOnBottom::updateMoney()
+{
+    qlcdMoney->display(QString::number(game->player->getMoney()));
 }

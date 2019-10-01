@@ -1,4 +1,5 @@
 #include "interfacetowerdetails.h"
+#include <memory>
 
 #include "game.h"
 extern Game * game;
@@ -19,13 +20,14 @@ InterfaceTowerDetails::InterfaceTowerDetails(QWidget *parent) : QWidget(parent)
 
 void InterfaceTowerDetails::setActiveTower(Tower *tower)
 {
-    if (activeTower)
-        disconnect(activeTower);
-
     activeTower = tower;
+
     setTowerNameAndVectorPrices();
-//    connect(buttonUpgrade, SIGNAL(clicked()), activeTower, SLOT(increaseLevel()));
-    connect(buttonUpgrade, &QPushButton::clicked, [this](){ activeTower->increaseLevelAndReducePlayerMoney(vectorTowerPrices_NR); });
+    QObject::disconnect(conn);
+    conn = QObject::connect(buttonUpgrade, &QPushButton::clicked, [this](){
+        activeTower->increaseLevelAndReducePlayerMoney(vectorTowerPrices_NR);
+    });
+
     disconnect(this);
     connect(buttonUpgrade, SIGNAL(clicked()), this, SLOT(updateInterface()));
     updateInterface();
@@ -33,6 +35,7 @@ void InterfaceTowerDetails::setActiveTower(Tower *tower)
 
 void InterfaceTowerDetails::updateInterface()
 {
+
     qlcdLevel->display(activeTower->getCurrentLevel());
     qlcdDamage->display(QString::number(activeTower->getDamage()));
 

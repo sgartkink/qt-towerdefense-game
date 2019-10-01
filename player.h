@@ -9,16 +9,18 @@ class Player : public QObject
 {
     Q_OBJECT
 private:
-    unsigned int money = 500;
+    unsigned int money = 2000;
 
 public:
     Player();
 
     unsigned int getMoney() { return money; }
 
+    void updateUpgradeAndBuyButtons();
+
 public slots:
-    void increaseMoney(unsigned int increased) { money += increased; }
-    void decreaseMoney(unsigned int decreased) { money -= decreased; }
+    void increaseMoney(unsigned int increased);
+    void decreaseMoney(unsigned int decreased);
 };
 
 #endif // PLAYER_H

@@ -7,8 +7,6 @@ Game::Game()
     map->createAllHexesAndAddToScene();
     gridLayout->addWidget(map,0,0);
 
-
-
     setLayout(gridLayout);
 }
 

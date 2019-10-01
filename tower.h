@@ -34,7 +34,7 @@ public:
 
     unsigned int getAttackRange() const { return attackRange; }
     unsigned int getDamage() { return damage[currentLevel-1]; }
-    unsigned int getPrice(unsigned short vectorTowerPrices_NR) { return VECTOR_TOWER_PRICES[vectorTowerPrices_NR][currentLevel-1]; }
+    unsigned int getPrice(unsigned short vectorTowerPrices_NR) { return VECTOR_TOWER_PRICES[vectorTowerPrices_NR][currentLevel]; }
     QVector<Hex*> getVectorHexesInRange() { return vectorHexesInRange; }
     Hex * getParentHex() { return parentHex; }
     short getCurrentLevel() { return currentLevel; }

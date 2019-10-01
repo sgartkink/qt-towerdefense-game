@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QLCDNumber>
 #include <QPushButton>
+#include <memory>
 
 #include "global_consts.h"
 #include "tower.h"
@@ -23,6 +24,9 @@ private:
     QLCDNumber * qlcdDamage = new QLCDNumber(5);
     QLabel * textLevel = new QLabel("Level:");
     QLCDNumber * qlcdLevel = new QLCDNumber(5);
+
+    std::unique_ptr<QMetaObject::Connection> pconn{new QMetaObject::Connection};
+    QMetaObject::Connection &conn = *pconn;
 
     Tower * activeTower = nullptr;
     unsigned short vectorTowerPrices_NR;

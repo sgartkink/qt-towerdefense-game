@@ -24,7 +24,8 @@ public:
     void setInterface(unsigned short interface) { setCurrentIndex(interface); }
     void setAllConnects();
 
-    InterfaceTowerDetails * getInterfaceWithTowerDetails() { return interfaceTowerDetails; }
+    InterfaceTowerDetails * getInterfaceTowerDetails() { return interfaceTowerDetails; }
+    InterfaceWithTowerOptions * getInterfaceWithTowerOptions() { return interfaceWithTowerOptions; }
 };
 
 #endif // INTERFACEONRIGHTSIDE_H
