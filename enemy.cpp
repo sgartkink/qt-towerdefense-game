@@ -57,11 +57,24 @@ void Enemy::checkIfEnemyIsCloseEnoughToNextPoint()
 void Enemy::setNewDestPointAndRotate()
 {
     pathPoints_index++;
-    if (pathPoints_index >= pathPoints.size())
-        return;
+
+    checkIfPathIsOver();
 
     destPoint = pathPoints[pathPoints_index];
     rotateToPoint();
+}
+
+void Enemy::checkIfPathIsOver()
+{
+    if (pathPoints_index >= pathPoints.size())
+        deleteEnemy();
+}
+
+void Enemy::deleteEnemy()
+{
+    game->player->decreaseHp(damage);
+    delete this;
+    return;
 }
 
 void Enemy::reduceHP(unsigned int reduction)

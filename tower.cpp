@@ -20,6 +20,5 @@ Tower::Tower(unsigned int range, Qt::GlobalColor color)
 void Tower::increaseLevelAndReducePlayerMoney(unsigned short vectorTowerPrices_NR)
 {
     game->player->decreaseMoney(getPrice(vectorTowerPrices_NR));
-//    qDebug() << "a";
     currentLevel++;
 }

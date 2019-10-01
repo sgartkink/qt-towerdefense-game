@@ -22,6 +22,23 @@ void Player::decreaseMoney(unsigned int decreased)
     updateUpgradeAndBuyButtons();
 }
 
+void Player::increaseHp(int increased)
+{
+    hp += increased;
+
+    game->interfaceOnBottom->updateHp();
+}
+
+void Player::decreaseHp(int decreased)
+{
+    hp -= decreased;
+
+    game->interfaceOnBottom->updateHp();
+
+//    if (hp <= 0)
+        //end game
+}
+
 void Player::updateUpgradeAndBuyButtons()
 {
     game->interfaceOnBottom->updateMoney();

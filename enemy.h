@@ -16,10 +16,11 @@ private:
     static int enemyCount;
 
     const int LENGTH_OF_MOVEMENT = 5;
+    const unsigned int reward = 10;
+    const unsigned int damage = 1;
 
     int nr;
     int hp = 10;
-    unsigned int reward = 10;
     QList<QPointF> pathPoints;
     int pathPoints_index = 1; //because pathPoints[0] is (0,0)
     QPointF destPoint;
@@ -30,6 +31,8 @@ private:
     void updateLine();
     void checkIfEnemyIsCloseEnoughToNextPoint();
     void setNewDestPointAndRotate();
+    void checkIfPathIsOver();
+    void deleteEnemy();
 
 private slots:
     void moveForward();

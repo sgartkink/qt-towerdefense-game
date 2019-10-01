@@ -16,12 +16,15 @@ private:
 
     QLabel * textMoney = new QLabel("Money:");
     QLCDNumber * qlcdMoney = new QLCDNumber(5);
+    QLabel * textHP = new QLabel("HP:");
+    QLCDNumber * qlcdHP = new QLCDNumber(5);
 
 public:
     InterfaceOnBottom();
 
 public slots:
     void updateMoney();
+    void updateHp();
 };
 
 #endif // INTERFACEONBOTTOM_H
