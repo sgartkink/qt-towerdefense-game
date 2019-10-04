@@ -10,6 +10,12 @@ Game::Game()
     setLayout(gridLayout);
 }
 
+void Game::increaseLevelAndUpdateInterfaces()
+{
+    level++;
+    interfaceOnBottom->updateLevel();
+}
+
 void Game::configureLayout()
 {
     gridLayout->setSpacing(0);
@@ -32,4 +38,9 @@ void Game::configureInterfaces()
 
     interfaceOnBottom = new InterfaceOnBottom();
     gridLayout->addWidget(interfaceOnBottom,1,0,1,2);
+}
+
+void Game::configurePathForEnemy()
+{
+    map->setPathForEnemy();
 }

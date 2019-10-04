@@ -33,6 +33,8 @@ void Hex::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (inRangeChosenHexWithTower)
         changeHexBrushAndUpdate(HEX_IN_TOWER_RANGE_COLOR);
+    else if (isPath)
+        changeHexBrushAndUpdate(PATH_COLOR);
     else
         changeHexBrushAndUpdate(HEX_NORMAL_COLOR);
 }

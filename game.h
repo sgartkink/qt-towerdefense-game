@@ -14,6 +14,8 @@
 class Game : public QWidget
 {
 private:
+    unsigned int level = 1;
+
     void configureLayout();
 
 public:
@@ -25,8 +27,12 @@ public:
 
     Game();
 
+    unsigned int getLevel() { return level; }
+    void increaseLevelAndUpdateInterfaces();
+
     void setAllConnects();
     void configureInterfaces();
+    void configurePathForEnemy();
 };
 
 #endif // GAME_H

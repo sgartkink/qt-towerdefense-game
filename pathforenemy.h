@@ -9,6 +9,8 @@ class PathForEnemy
 private:
     QList<QPointF> points;
 
+    QPointF addHexToPath(int x, int y);
+    void changeHexColor(int x, int y);
     QPointF getHexCenter(int x, int y);
     qreal getHexCenterX(int x, int y);
     qreal getHexCenterY(int x, int y);

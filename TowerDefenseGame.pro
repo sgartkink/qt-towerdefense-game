@@ -51,7 +51,8 @@ SOURCES += \
     interfacewithtoweroptions.cpp \
     interfacewaitforclickhex.cpp \
     interfacetowerdetails.cpp \
-    player.cpp
+    player.cpp \
+    newlevelenemies.cpp
 
 HEADERS += \
     hex.h \
@@ -81,7 +82,8 @@ HEADERS += \
     interfacewaitforclickhex.h \
     interfacetowerdetails.h \
     towers_prices.h \
-    player.h
+    player.h \
+    newlevelenemies.h
 
 FORMS +=
 

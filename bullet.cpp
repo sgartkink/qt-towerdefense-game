@@ -48,7 +48,7 @@ void Bullet::rotateToAim()
 
 void Bullet::updateLine()
 {
-    lineFromBulletToAim = QLineF(pos(), aim->pos());
+    lineFromBulletToAim = QLineF(pos(), QPointF(aim->pos().x() + ENEMY_SIZE/2, aim->pos().y() + ENEMY_SIZE/2));
 }
 
 void Bullet::checkIfBulletIsCloseEnoughAim()
@@ -58,6 +58,7 @@ void Bullet::checkIfBulletIsCloseEnoughAim()
         game->player->increaseMoney(aim->getReward());
         aim->reduceHP(damage);
         timerForCheckingAim->stop();
+        game->map->getNewLevelEnemies()->decreaseEnemies();
         delete this;
     }
 }

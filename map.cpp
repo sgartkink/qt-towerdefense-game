@@ -1,5 +1,4 @@
 #include "map.h"
-#include "enemy.h"
 
 #include "game.h"
 extern Game * game;
@@ -61,15 +60,9 @@ void Map::hexWasClicked(Hex *h)
     else
         game->interfaceOnTheRightSide->setInterface(INTERFACE_WITH_TOWER_OPTIONS_NR);
 
-    if (!isPathCreated)
-    {
-        setPathForEnemy();
-        isPathCreated = true;
-    }
-
-    Enemy * enemy = new Enemy(pathForEnemy->getPoints());
-    scene->addItem(enemy);
-    vectorAllEnemies.append(enemy);
+//    Enemy * enemy = new Enemy(pathForEnemy->getPoints());
+//    scene->addItem(enemy);
+//    vectorAllEnemies.append(enemy);
 }
 
 void Map::createAndAddEffectToScene()
@@ -95,10 +88,17 @@ void Map::paintHexesInTowerRange(Qt::GlobalColor color, bool inRange)
         for (int j = 0; j < MAP_SIZE; j++)
             if (distaneBetweenTwoHexes(vectorAllHexes[i][j], activeHex) <= activeHex->getTowerAttackRange() &&
                 distaneBetweenTwoHexes(vectorAllHexes[i][j], activeHex) != 0)
-            {
-                vectorAllHexes[i][j]->changeHexBrushAndUpdate(color);
-                vectorAllHexes[i][j]->setInRangeChosenHexWithTower(inRange);
-            }
+                changeHexColorDependsOnPath(vectorAllHexes[i][j], color, inRange);
+}
+
+void Map::changeHexColorDependsOnPath(Hex * hex, Qt::GlobalColor color, bool inRange)
+{
+    hex->changeHexBrushAndUpdate(color);
+
+    if (!inRange)
+        if (hex->hasPath())
+            hex->changeHexBrushAndUpdate(PATH_COLOR);
+    hex->setInRangeChosenHexWithTower(inRange);
 }
 
 void Map::mousePressEvent(QMouseEvent *event)

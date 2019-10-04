@@ -19,6 +19,7 @@
 #include "enemy.h"
 #include "towerrangeattack.h"
 #include "pathforenemy.h"
+#include "newlevelenemies.h"
 
 /**
  * TODO:
@@ -42,27 +43,28 @@ private:
     QVector<QVector <Hex*>> vectorAllHexes;
     QVector<Tower*> vectorAllTowers;
     QVector<Enemy*> vectorAllEnemies;
-    bool isPathCreated = false;
+    NewLevelEnemies * newLevelEnemies = new NewLevelEnemies;
 
     void createAndAddEffectToScene();
     void deleteAndRemoveEffectFromScene();
     void paintHexesInTowerRange(Qt::GlobalColor color, bool inRange);
     void mousePressEvent(QMouseEvent *event);
+    void changeHexColorDependsOnPath(Hex * hex, Qt::GlobalColor color, bool inRange);
 
     unsigned int distaneBetweenTwoHexes(Hex * a, Hex * b);
 
 public:
     Map();
-    ~Map() {}
 
-    Hex * getHex(int x, int y) { return vectorAllHexes[y][x]; }
     QGraphicsScene * getScene() { return scene; }
+    Hex * getHex(int x, int y) { return vectorAllHexes[y][x]; }
+    Hex * getActiveHex() { return activeHex; }
+    NewLevelEnemies * getNewLevelEnemies() { return newLevelEnemies; }
+    QList<QPointF> getPathForEnemy() { return pathForEnemy->getPoints(); }
 
     void createAllHexesAndAddToScene();
     void setPathForEnemy();
     void hexWasClicked(Hex * h);
-
-    Hex * getActiveHex() { return activeHex; }
 
 public slots:
     void createTower(int nr);

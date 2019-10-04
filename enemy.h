@@ -15,13 +15,13 @@ class Enemy : public QObject, public QGraphicsRectItem
 private:
     static int enemyCount;
 
-    const int LENGTH_OF_MOVEMENT = 5;
+    const unsigned int LENGTH_OF_MOVEMENT = 5;
     const unsigned int reward = 10;
     const unsigned int damage = 1;
+    const QList<QPointF> pathPoints;
 
     int nr;
     int hp = 10;
-    QList<QPointF> pathPoints;
     int pathPoints_index = 1; //because pathPoints[0] is (0,0)
     QPointF destPoint;
     QTimer * moveTimer = new QTimer(this);
@@ -31,14 +31,15 @@ private:
     void updateLine();
     void checkIfEnemyIsCloseEnoughToNextPoint();
     void setNewDestPointAndRotate();
-    void checkIfPathIsOver();
-    void deleteEnemy();
+    bool checkIfPathIsOver();
+    void attackPlayer();
 
 private slots:
     void moveForward();
 
 public:
-    Enemy(QList<QPointF> pathPoints_);
+    Enemy();
+    ~Enemy();
 
     int getNr() { return nr; }
     int getHp() const { return hp; }

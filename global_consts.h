@@ -27,5 +27,6 @@ const Qt::GlobalColor HEX_NORMAL_COLOR = Qt::black;
 const Qt::GlobalColor HEX_PEN_COLOR = Qt::cyan;
 const Qt::GlobalColor EFFECT_PEN_COLOR = Qt::darkMagenta;
 const Qt::GlobalColor ENEMY_COLOR = Qt::white;
+const Qt::GlobalColor PATH_COLOR = Qt::yellow;
 
 #endif // GLOBAL_CONSTS_H

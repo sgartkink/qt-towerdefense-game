@@ -5,8 +5,8 @@ extern Game * game;
 
 int Enemy::enemyCount = 0;
 
-Enemy::Enemy(QList<QPointF> pathPoints_)
-    : pathPoints(pathPoints_)
+Enemy::Enemy()
+    : pathPoints(game->map->getPathForEnemy())
 {
     setRect(0, -ENEMY_SIZE/2, ENEMY_SIZE, ENEMY_SIZE);
 
@@ -58,23 +58,34 @@ void Enemy::setNewDestPointAndRotate()
 {
     pathPoints_index++;
 
-    checkIfPathIsOver();
+    if (checkIfPathIsOver())
+        return;
 
     destPoint = pathPoints[pathPoints_index];
     rotateToPoint();
 }
 
-void Enemy::checkIfPathIsOver()
+bool Enemy::checkIfPathIsOver()
 {
     if (pathPoints_index >= pathPoints.size())
-        deleteEnemy();
+    {
+        attackPlayer();
+        this->~Enemy();
+        return true;
+    }
+    return false;
 }
 
-void Enemy::deleteEnemy()
+void Enemy::attackPlayer()
 {
     game->player->decreaseHp(damage);
-    delete this;
-    return;
+}
+
+Enemy::~Enemy()
+{
+    moveTimer->stop();
+    disconnect(moveTimer, SIGNAL(timeout()), this, SLOT(moveForward()));
+    game->map->getScene()->removeItem(this);
 }
 
 void Enemy::reduceHP(unsigned int reduction)
@@ -87,9 +98,5 @@ void Enemy::reduceHP(unsigned int reduction)
 void Enemy::checkIfEnemyStillExists()
 {
     if (hp <= 0)
-    {
-        moveTimer->stop();
-        disconnect(moveTimer, SIGNAL(timeout()), this, SLOT(moveForward()));
-        game->map->getScene()->removeItem(this);
-    }
+        this->~Enemy();
 }
