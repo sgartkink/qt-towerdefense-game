@@ -52,32 +52,32 @@ void InterfaceTowerDetails::updateInterface()
 
 void InterfaceTowerDetails::setTowerNameAndVectorPrices()
 {
-    QString name = activeTower->pen().color().name();
-    if (name == "#0000ff")
-    {
-        textTowerName->setText("Blue Tower");
-        vectorTowerPrices_NR = BLUE_TOWER_PRICES_NR;
-    }
-    else if (name == "#00ff00")
-    {
-        textTowerName->setText("Green Tower");
-        vectorTowerPrices_NR = GREEN_TOWER_PRICES_NR;
-    }
-    else if (name == "#ffffff")
-    {
-        textTowerName->setText("White tower");
-        vectorTowerPrices_NR = WHITE_TOWER_PRICES_NR;
-    }
-    else if (name == "#ffff00")
-    {
-        textTowerName->setText("Yellow Tower");
-        vectorTowerPrices_NR = YELLOW_TOWER_PRICES_NR;
-    }
-    else
-    {
-        textTowerName->setText("Dark Cyan Tower");
-        vectorTowerPrices_NR = DARK_CYAN_TOWER_PRICES_NR;
-    }
+    Qt::GlobalColor name = activeTower->getTowerColor();
+//    if (name == "#0000ff")
+//    {
+//        textTowerName->setText("Blue Tower");
+//        vectorTowerPrices_NR = BLUE_TOWER_PRICES_NR;
+//    }
+//    else if (name == "#00ff00")
+//    {
+//        textTowerName->setText("Green Tower");
+//        vectorTowerPrices_NR = GREEN_TOWER_PRICES_NR;
+//    }
+//    else if (name == "#ffffff")
+//    {
+//        textTowerName->setText("White tower");
+//        vectorTowerPrices_NR = WHITE_TOWER_PRICES_NR;
+//    }
+//    else if (name == "#ffff00")
+//    {
+//        textTowerName->setText("Yellow Tower");
+//        vectorTowerPrices_NR = YELLOW_TOWER_PRICES_NR;
+//    }
+//    else
+//    {
+//        textTowerName->setText("Dark Cyan Tower");
+//        vectorTowerPrices_NR = DARK_CYAN_TOWER_PRICES_NR;
+//    }
 }
 
 void InterfaceTowerDetails::checkTowerPriceDependsOnLevel()

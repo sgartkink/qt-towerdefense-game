@@ -29,21 +29,21 @@ SOURCES += \
     hex.cpp \
     game.cpp \
     map.cpp \
-    tower.cpp \
-    greentower.cpp \
+    towers/tower.cpp \
+    towers/greentower.cpp \
     interfaceonrightside.cpp \
     chosenhexeffect.cpp \
-    yellowtower.cpp \
-    whitetower.cpp \
-    bluetower.cpp \
-    darkcyantower.cpp \
-    bullet.cpp \
-    bluebullet.cpp \
+    towers/yellowtower.cpp \
+    towers/whitetower.cpp \
+    towers/bluetower.cpp \
+    towers/darkcyantower.cpp \
+    bullets/bullet.cpp \
+    bullets/bluebullet.cpp \
     interfaceonbottom.cpp \
-    darkcyanbullet.cpp \
-    greenbullet.cpp \
-    whitebullet.cpp \
-    yellowbullet.cpp \
+    bullets/darkcyanbullet.cpp \
+    bullets/greenbullet.cpp \
+    bullets/whitebullet.cpp \
+    bullets/yellowbullet.cpp \
     enemy.cpp \
     towerrangeattack.cpp \
     pathforenemy.cpp \
@@ -52,28 +52,29 @@ SOURCES += \
     interfacewaitforclickhex.cpp \
     interfacetowerdetails.cpp \
     player.cpp \
-    newlevelenemies.cpp
+    newlevelenemies.cpp \
+    towersquareobject.cpp
 
 HEADERS += \
     hex.h \
     game.h \
     global_consts.h \
     map.h \
-    tower.h \
-    greentower.h \
+    towers/tower.h \
+    towers/greentower.h \
     interfaceonrightside.h \
     chosenhexeffect.h \
-    yellowtower.h \
-    whitetower.h \
-    bluetower.h \
-    darkcyantower.h \
-    bullet.h \
-    bluebullet.h \
+    towers/yellowtower.h \
+    towers/whitetower.h \
+    towers/bluetower.h \
+    towers/darkcyantower.h \
+    bullets/bullet.h \
+    bullets/bluebullet.h \
     interfaceonbottom.h \
-    darkcyanbullet.h \
-    greenbullet.h \
-    whitebullet.h \
-    yellowbullet.h \
+    bullets/darkcyanbullet.h \
+    bullets/greenbullet.h \
+    bullets/whitebullet.h \
+    bullets/yellowbullet.h \
     enemy.h \
     towerrangeattack.h \
     pathforenemy.h \
@@ -83,7 +84,8 @@ HEADERS += \
     interfacetowerdetails.h \
     towers_prices.h \
     player.h \
-    newlevelenemies.h
+    newlevelenemies.h \
+    towersquareobject.h
 
 FORMS +=
 

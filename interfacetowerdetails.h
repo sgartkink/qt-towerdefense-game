@@ -9,7 +9,7 @@
 #include <memory>
 
 #include "global_consts.h"
-#include "tower.h"
+#include "towers/tower.h"
 
 class InterfaceTowerDetails : public QWidget
 {

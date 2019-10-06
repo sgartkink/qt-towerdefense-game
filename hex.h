@@ -9,7 +9,7 @@
 #include <QtDebug>
 
 #include "global_consts.h"
-#include "tower.h"
+#include "towers/tower.h"
 
 class Hex : public QGraphicsPolygonItem
 {

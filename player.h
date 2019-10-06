@@ -4,7 +4,6 @@
 #include <QObject>
 #include <QtDebug>
 
-
 class Player : public QObject
 {
     Q_OBJECT

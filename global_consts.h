@@ -6,6 +6,7 @@
 const int MAP_SIZE = 8;
 
 const int HEX_SIZE = 40;
+const int TOWER_SIZE = HEX_SIZE/4;
 const int BULLET_SIZE = HEX_SIZE/4;
 const int ENEMY_SIZE = HEX_SIZE/2;
 

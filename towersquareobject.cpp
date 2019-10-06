@@ -1,6 +1,7 @@
 #include "towersquareobject.h"
 
-TowerSquareObject::TowerSquareObject()
+TowerSquareObject::TowerSquareObject(Qt::GlobalColor color)
 {
-
+    pen = QPen(color);
+    setPen(pen);
 }

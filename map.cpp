@@ -59,10 +59,6 @@ void Map::hexWasClicked(Hex *h)
     }
     else
         game->interfaceOnTheRightSide->setInterface(INTERFACE_WITH_TOWER_OPTIONS_NR);
-
-//    Enemy * enemy = new Enemy(pathForEnemy->getPoints());
-//    scene->addItem(enemy);
-//    vectorAllEnemies.append(enemy);
 }
 
 void Map::createAndAddEffectToScene()
@@ -130,22 +126,26 @@ void Map::createTower(int nr)
         Tower * tower = nullptr;
         switch(nr)
         {
-        case BLUE_TOWER_NR: tower = new BlueTower();
+        case BLUE_TOWER_NR:
+            tower = new BlueTower(activeHex->pos());
             break;
-        case GREEN_TOWER_NR: tower = new GreenTower();
+        case GREEN_TOWER_NR:
+            tower = new GreenTower(activeHex->pos());
             break;
-        case DARKCYAN_TOWER_NR: tower = new DarkCyanTower();
+        case DARKCYAN_TOWER_NR:
+            tower = new DarkCyanTower(activeHex->pos());
             break;
-        case WHITE_TOWER_NR: tower = new WhiteTower();
+        case WHITE_TOWER_NR:
+            tower = new WhiteTower(activeHex->pos());
             break;
-        case YELLOW_TOWER_NR: tower = new YellowTower();
+        case YELLOW_TOWER_NR:
+            tower = new YellowTower(activeHex->pos());
             break;
-        default: tower = new GreenTower();
+        default:
+            tower = new GreenTower(activeHex->pos());
         }
-        tower->setPos(activeHex->x(), activeHex->y());
         tower->setParentHex(activeHex);
         vectorAllTowers.append(tower);
-        scene->addItem(tower);
 
         activeHex->setHasTower(true);
         activeHex->setTower(tower);

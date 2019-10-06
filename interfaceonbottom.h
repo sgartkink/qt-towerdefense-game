@@ -29,7 +29,7 @@ private:
 public:
     InterfaceOnBottom();
 
-    void setButtonStartGameCheckable(bool checkable) { buttonStartGame->setCheckable(checkable); }
+    void setButtonStartGameEnable(bool enable) { buttonStartGame->setEnabled(enable); }
 
 public slots:
     void updateMoney();

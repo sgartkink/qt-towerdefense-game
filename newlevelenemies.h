@@ -22,6 +22,8 @@ private:
     void createAllLevels();
     void checkIfAllEnemiesAreCreated();
     void stopCreatingNewEnemies();
+    void checkIfAllEnemiesAreKilled();
+    void endLevel();
 
 public:
     NewLevelEnemies();
