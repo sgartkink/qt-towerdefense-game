@@ -19,6 +19,8 @@ private:
     unsigned int enemiesLeft;
     unsigned int enemiesCount = 0;
 
+    bool isRunningLevel = false;
+
     void createAllLevels();
     void checkIfAllEnemiesAreCreated();
     void stopCreatingNewEnemies();
@@ -29,6 +31,7 @@ public:
     NewLevelEnemies();
 
     unsigned int getEnemiesLeft() { return enemiesLeft; }
+    bool getIsRunningLevel() { return isRunningLevel; }
 
     void decreaseEnemies();
     void updateQLCDNumberEnemiesLeft();

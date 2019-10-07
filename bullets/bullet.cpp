@@ -32,13 +32,14 @@ void Bullet::moveBulletTowardsAim()
 
     double theta = rotation();
 
-    double dy = LENGTH_OF_MOVEMENT * qSin(qDegreesToRadians(theta));
     double dx = LENGTH_OF_MOVEMENT * qCos(qDegreesToRadians(theta));
+    double dy = LENGTH_OF_MOVEMENT * qSin(qDegreesToRadians(theta));
 
     setPos(x()+dx, y()+dy);
 
     checkIfBulletIsCloseEnoughAim();
 }
+
 
 void Bullet::rotateToAim()
 {
@@ -55,10 +56,8 @@ void Bullet::checkIfBulletIsCloseEnoughAim()
 {
     if (lineFromBulletToAim.length() < 10)
     {
-        game->player->increaseMoney(aim->getReward());
         aim->reduceHP(damage);
         timerForCheckingAim->stop();
-        game->map->getNewLevelEnemies()->decreaseEnemies();
         delete this;
     }
 }

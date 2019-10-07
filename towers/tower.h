@@ -5,7 +5,6 @@
 #include <QPen>
 #include <QObject>
 
-//#include "global_consts.h"
 #include "towers_prices.h"
 #include "bullets/bullet.h"
 #include "towerrangeattack.h"

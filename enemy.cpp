@@ -86,6 +86,8 @@ Enemy::~Enemy()
     moveTimer->stop();
     disconnect(moveTimer, SIGNAL(timeout()), this, SLOT(moveForward()));
     game->map->getScene()->removeItem(this);
+    game->map->getNewLevelEnemies()->decreaseEnemies();
+    game->player->increaseMoney(reward);
 }
 
 void Enemy::reduceHP(unsigned int reduction)

@@ -21,7 +21,7 @@ private:
     const QList<QPointF> pathPoints;
 
     int nr;
-    int hp = 10;
+    int hp = 50;
     int pathPoints_index = 1; //because pathPoints[0] is (0,0)
     QPointF destPoint;
     QTimer * moveTimer = new QTimer(this);
@@ -43,7 +43,6 @@ public:
 
     int getNr() { return nr; }
     int getHp() const { return hp; }
-    unsigned int getReward() const { return reward; }
 
     void reduceHP(unsigned int reduction);
     void checkIfEnemyStillExists();

@@ -10,12 +10,6 @@ Game::Game()
     setLayout(gridLayout);
 }
 
-void Game::increaseLevelAndUpdateInterfaces()
-{
-    level++;
-    interfaceOnBottom->updateLevel();
-}
-
 void Game::configureLayout()
 {
     gridLayout->setSpacing(0);
@@ -24,11 +18,6 @@ void Game::configureLayout()
     gridLayout->setColumnMinimumWidth(1,200);
     gridLayout->setRowMinimumHeight(0,580);
     gridLayout->setRowMinimumHeight(1,120);
-}
-
-void Game::setAllConnects()
-{
-    interfaceOnTheRightSide->setAllConnects();
 }
 
 void Game::configureInterfaces()
@@ -43,4 +32,15 @@ void Game::configureInterfaces()
 void Game::configurePathForEnemy()
 {
     map->setPathForEnemy();
+}
+
+void Game::setAllConnects()
+{
+    interfaceOnTheRightSide->setAllConnects();
+}
+
+void Game::increaseLevelAndUpdateInterfaces()
+{
+    level++;
+    interfaceOnBottom->updateLevel();
 }

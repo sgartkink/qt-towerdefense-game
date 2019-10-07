@@ -12,6 +12,10 @@ const int ENEMY_SIZE = HEX_SIZE/2;
 
 const short MAX_TOWER_LEVEL = 5;
 
+const qreal OPACITY_NORMAL = 1;
+const qreal OPACITY_HOVER = 0.6;
+const qreal OPACITY_OUT_OF_REACH = 0.2;
+
 const short BLUE_TOWER_NR = 0;
 const short GREEN_TOWER_NR = 1;
 const short DARKCYAN_TOWER_NR = 2;

@@ -27,21 +27,44 @@ Hex::Hex(int x_, int y_, QGraphicsItem * parent)
 void Hex::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     changeHexBrushAndUpdate(HEX_UNDER_MOUSE_COLOR);
+
+    changeOpacityBasedOnHexAndTower(OPACITY_HOVER, true);
 }
 
 void Hex::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    if (inRangeChosenHexWithTower)
-        changeHexBrushAndUpdate(HEX_IN_TOWER_RANGE_COLOR);
-    else if (isPath)
+    if (isPath)
         changeHexBrushAndUpdate(PATH_COLOR);
     else
         changeHexBrushAndUpdate(HEX_NORMAL_COLOR);
+
+    changeOpacityBasedOnHexAndTower(OPACITY_NORMAL, false);
 }
 
 void Hex::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     game->map->hexWasClicked(this);
+}
+
+void Hex::changeOpacityBasedOnHexAndTower(qreal opacity, bool checkTower)
+{
+    if (game->map->getActiveHex())
+    {
+        if (!game->map->getActiveHex()->hasTower())
+            if (this != game->map->getActiveHex())
+            {
+                if (checkTower)
+                {
+                    if (isTower)
+                        game->map->changeOpacityHexesOutOfReach(opacity, this);
+                }
+                else
+                    game->map->changeOpacityHexesOutOfReach(opacity, this);
+            }
+    }
+    else
+        if (this != game->map->getActiveHex())
+            game->map->changeOpacityHexesOutOfReach(opacity, this);
 }
 
 void Hex::changeHexBrushAndUpdate(Qt::GlobalColor color)
