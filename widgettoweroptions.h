@@ -10,13 +10,13 @@
 class WidgetTowerOptions : public QFrame
 {
 private:
+    const unsigned int towerPrice;
+
     QGridLayout * gridLayout = new QGridLayout();
     QLabel * towerName = new QLabel();
     QLabel * textPRICE = new QLabel("Price:");
     QLCDNumber * qlcdPrice = new QLCDNumber(5);
     QPushButton * buyTowerButton = new QPushButton();
-
-    const unsigned int towerPrice;
 
 public:
     WidgetTowerOptions(QString towerName_, unsigned int towerPrice_);

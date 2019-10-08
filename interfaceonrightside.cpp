@@ -5,12 +5,12 @@ extern Game * game;
 
 InterfaceOnRightSide::InterfaceOnRightSide()
 {
-    addWidget(interfaceWaitForClickHex);
-    addWidget(interfaceWithTowerOptions);
-    addWidget(interfaceTowerDetails);
+    addWidget(widgetWaitForClickHex);
+    addWidget(widgetWithTowerOptions);
+    addWidget(widgetTowerDetails);
 }
 
 void InterfaceOnRightSide::setAllConnects()
 {
-    interfaceWithTowerOptions->setAllButtonConnects();
+    widgetWithTowerOptions->setAllButtonConnects();
 }

@@ -15,6 +15,7 @@ private:
 
     QLabel * textMoney = new QLabel("Money:");
     QLCDNumber * qlcdMoney = new QLCDNumber(5);
+
     QLabel * textHP = new QLabel("HP:");
     QLCDNumber * qlcdHP = new QLCDNumber(5);
 

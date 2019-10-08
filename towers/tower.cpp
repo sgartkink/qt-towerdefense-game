@@ -4,7 +4,7 @@
 extern Game * game;
 
 Tower::Tower(unsigned int range, Qt::GlobalColor color, QPointF towerPosition_)
-    : attackRange(range), towerColor(color), towerPosition(towerPosition_)
+    : towerColor(color), towerPosition(towerPosition_), attackRange(range)
 {
     createNewTowerSquare();
 }

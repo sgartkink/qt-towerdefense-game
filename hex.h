@@ -15,39 +15,37 @@ class Hex : public QGraphicsPolygonItem
 {
 private:
     const int xOffset, xAxial, yCord, zCord;
+
     QBrush brush = QBrush(HEX_NORMAL_COLOR, Qt::SolidPattern);
     QPen pen = QPen(HEX_PEN_COLOR);
     Tower * tower = nullptr;
-    bool isTower = false;
     bool isPath = false;
 
     inline int offsetToAxial(int x, int y) { return x - (y-(y&1))/2; }
 
+    void mousePressEvent(QGraphicsSceneMouseEvent * event);
     void hoverEnterEvent(QGraphicsSceneHoverEvent * event);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
-    void mousePressEvent(QGraphicsSceneMouseEvent * event);
 
     void changeOpacityBasedOnHexAndTower(qreal opacity, bool checkTower);
 
 public:
-    Hex(int x, int y, QGraphicsItem * parent = nullptr);
-    ~Hex() {}
+    Hex(int x, int y);
 
-    Tower * getTower() const { return tower; }
     int getXOffset() const { return xOffset; }
     int getXAxial() const { return xAxial; }
     int getY() const { return yCord; }
     int getZ() const { return zCord; }
+    Tower * getTower() const { return tower; }
     unsigned int getTowerAttackRange() const { return tower->getAttackRange(); }
-    bool hasTower() const { return isTower; }
+
     bool hasPath() const { return isPath; }
 
-    void setHasTower(bool t) { isTower = t; }
     void setTower(Tower * t) { tower = t; }
     void setPath(bool path) { isPath = path; }
     void changeOpacity(qreal opacity) { setOpacity(opacity); }
 
-    void changeHexBrushAndUpdate(Qt::GlobalColor color);
+    void changeHexBrushColor(Qt::GlobalColor color);
 };
 
 #endif // HEX_H

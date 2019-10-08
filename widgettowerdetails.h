@@ -11,19 +11,24 @@
 #include "global_consts.h"
 #include "towers/tower.h"
 
-class InterfaceTowerDetails : public QWidget
+class WidgetTowerDetails : public QWidget
 {
     Q_OBJECT
 private:
     QGridLayout * gridLayout = new QGridLayout();
+
     QLabel * textTowerName = new QLabel();
-    QPushButton * buttonUpgrade = new QPushButton("Upgrade");
-    QLabel * textUpgradeCost = new QLabel("Upgrade cost:");
-    QLCDNumber * qlcdUpgradeCost = new QLCDNumber(5);
-    QLabel * textDamage = new QLabel("Damage:");
-    QLCDNumber * qlcdDamage = new QLCDNumber(5);
+
     QLabel * textLevel = new QLabel("Level:");
     QLCDNumber * qlcdLevel = new QLCDNumber(5);
+
+    QLabel * textDamage = new QLabel("Damage:");
+    QLCDNumber * qlcdDamage = new QLCDNumber(5);
+
+    QLabel * textUpgradeCost = new QLabel("Upgrade cost:");
+    QLCDNumber * qlcdUpgradeCost = new QLCDNumber(5);
+
+    QPushButton * buttonUpgrade = new QPushButton("Upgrade");
 
     std::unique_ptr<QMetaObject::Connection> pconn{new QMetaObject::Connection};
     QMetaObject::Connection &conn = *pconn;
@@ -35,7 +40,7 @@ private:
     void checkTowerPriceDependsOnLevel();
 
 public:
-    explicit InterfaceTowerDetails(QWidget *parent = nullptr);
+    explicit WidgetTowerDetails(QWidget *parent = nullptr);
 
 public slots:
     void setActiveTower(Tower * tower);

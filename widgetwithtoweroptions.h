@@ -7,7 +7,7 @@
 #include "widgettoweroptions.h"
 #include "towers_prices.h"
 
-class InterfaceWithTowerOptions : public QWidget
+class WidgetWithTowerOptions : public QWidget
 {
     Q_OBJECT
 private:
@@ -20,7 +20,7 @@ private:
     WidgetTowerOptions * widgetYellowTowerOptions = new WidgetTowerOptions("Yellow tower", VECTOR_TOWER_PRICES[YELLOW_TOWER_PRICES_NR][0]);
 
 public:
-    explicit InterfaceWithTowerOptions(QWidget *parent = nullptr);
+    explicit WidgetWithTowerOptions(QWidget *parent = nullptr);
 
     void setAllButtonConnects();
 

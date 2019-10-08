@@ -1,10 +1,9 @@
-#include "interfacetowerdetails.h"
-#include <memory>
+#include "widgettowerdetails.h"
 
 #include "game.h"
 extern Game * game;
 
-InterfaceTowerDetails::InterfaceTowerDetails(QWidget *parent) : QWidget(parent)
+WidgetTowerDetails::WidgetTowerDetails(QWidget *parent) : QWidget(parent)
 {
     setLayout(gridLayout);
 
@@ -18,24 +17,54 @@ InterfaceTowerDetails::InterfaceTowerDetails(QWidget *parent) : QWidget(parent)
     gridLayout->addWidget(buttonUpgrade);
 }
 
-void InterfaceTowerDetails::setActiveTower(Tower *tower)
+void WidgetTowerDetails::setActiveTower(Tower *tower)
 {
     activeTower = tower;
 
     setTowerNameAndVectorPrices();
+
     QObject::disconnect(conn);
     conn = QObject::connect(buttonUpgrade, &QPushButton::clicked, [this](){
         activeTower->increaseLevelAndReducePlayerMoney(vectorTowerPrices_NR);
     });
-
     disconnect(this);
     connect(buttonUpgrade, SIGNAL(clicked()), this, SLOT(updateInterface()));
+
     updateInterface();
 }
 
-void InterfaceTowerDetails::updateInterface()
+void WidgetTowerDetails::setTowerNameAndVectorPrices()
 {
+    Qt::GlobalColor towerColor = activeTower->getTowerColor();
 
+    switch(towerColor)
+    {
+    case 9:
+        textTowerName->setText("Blue Tower");
+        vectorTowerPrices_NR = BLUE_TOWER_PRICES_NR;
+        break;
+    case 16:
+        textTowerName->setText("Dark Cyan Tower");
+        vectorTowerPrices_NR = DARK_CYAN_TOWER_PRICES_NR;
+        break;
+    case 8:
+        textTowerName->setText("Green Tower");
+        vectorTowerPrices_NR = GREEN_TOWER_PRICES_NR;
+        break;
+    case 3:
+        textTowerName->setText("White Tower");
+        vectorTowerPrices_NR = WHITE_TOWER_PRICES_NR;
+        break;
+    case 12:
+        textTowerName->setText("Yellow Tower");
+        vectorTowerPrices_NR = YELLOW_TOWER_PRICES_NR;
+        break;
+    default: ;
+    }
+}
+
+void WidgetTowerDetails::updateInterface()
+{
     qlcdLevel->display(activeTower->getCurrentLevel());
     qlcdDamage->display(QString::number(activeTower->getDamage()));
 
@@ -50,37 +79,7 @@ void InterfaceTowerDetails::updateInterface()
         buttonUpgrade->setEnabled(false);
 }
 
-void InterfaceTowerDetails::setTowerNameAndVectorPrices()
-{
-    Qt::GlobalColor name = activeTower->getTowerColor();
-//    if (name == "#0000ff")
-//    {
-//        textTowerName->setText("Blue Tower");
-//        vectorTowerPrices_NR = BLUE_TOWER_PRICES_NR;
-//    }
-//    else if (name == "#00ff00")
-//    {
-//        textTowerName->setText("Green Tower");
-//        vectorTowerPrices_NR = GREEN_TOWER_PRICES_NR;
-//    }
-//    else if (name == "#ffffff")
-//    {
-//        textTowerName->setText("White tower");
-//        vectorTowerPrices_NR = WHITE_TOWER_PRICES_NR;
-//    }
-//    else if (name == "#ffff00")
-//    {
-//        textTowerName->setText("Yellow Tower");
-//        vectorTowerPrices_NR = YELLOW_TOWER_PRICES_NR;
-//    }
-//    else
-//    {
-//        textTowerName->setText("Dark Cyan Tower");
-//        vectorTowerPrices_NR = DARK_CYAN_TOWER_PRICES_NR;
-//    }
-}
-
-void InterfaceTowerDetails::checkTowerPriceDependsOnLevel()
+void WidgetTowerDetails::checkTowerPriceDependsOnLevel()
 {
     if (activeTower->getCurrentLevel() != MAX_TOWER_LEVEL)
         qlcdUpgradeCost->display(QString::number(activeTower->getPrice(vectorTowerPrices_NR)));

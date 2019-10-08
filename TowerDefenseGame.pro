@@ -48,12 +48,12 @@ SOURCES += \
     towerrangeattack.cpp \
     pathforenemy.cpp \
     widgettoweroptions.cpp \
-    interfacewithtoweroptions.cpp \
-    interfacewaitforclickhex.cpp \
-    interfacetowerdetails.cpp \
     player.cpp \
     newlevelenemies.cpp \
-    towersquareobject.cpp
+    towers/towersquareobject.cpp \
+    widgettowerdetails.cpp \
+    widgetwaitforclickhex.cpp \
+    widgetwithtoweroptions.cpp
 
 HEADERS += \
     hex.h \
@@ -79,13 +79,13 @@ HEADERS += \
     towerrangeattack.h \
     pathforenemy.h \
     widgettoweroptions.h \
-    interfacewithtoweroptions.h \
-    interfacewaitforclickhex.h \
-    interfacetowerdetails.h \
-    towers_prices.h \
+    towers/towers_prices.h \
     player.h \
     newlevelenemies.h \
-    towersquareobject.h
+    towers/towersquareobject.h \
+    widgettowerdetails.h \
+    widgetwaitforclickhex.h \
+    widgetwithtoweroptions.h
 
 FORMS +=
 

@@ -6,7 +6,6 @@ ChosenHexEffect::ChosenHexEffect()
     setPen(pen);
 
     connect(timerForChangeRect, SIGNAL(timeout()), this, SLOT(changeRect()));
-
     timerForChangeRect->start(50);
 }
 

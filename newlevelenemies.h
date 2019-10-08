@@ -1,8 +1,8 @@
 #ifndef NEWLEVELENEMIES_H
 #define NEWLEVELENEMIES_H
 
-#include <QVector>
 #include <QObject>
+#include <QVector>
 #include <QTimer>
 
 #include "enemy.h"
@@ -14,12 +14,11 @@ private:
     const unsigned short NR_ENEMIES_IN_VECTOR = 0;
     const unsigned short NR_FREQUENCY_CREATING_ENEMIES = 1;
 
-    QVector<QVector<unsigned int>> vectorEnemies;
     QTimer * timerCreateNewEnemy = new QTimer(this);
-    unsigned int enemiesLeft;
     unsigned int enemiesCount = 0;
-
+    unsigned int enemiesLeft;
     bool isRunningLevel = false;
+    QVector<QVector<unsigned int>> vectorEnemies;
 
     void createAllLevels();
     void checkIfAllEnemiesAreCreated();

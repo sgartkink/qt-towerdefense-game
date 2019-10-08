@@ -2,7 +2,10 @@
 #define PLAYER_H
 
 #include <QObject>
-#include <QtDebug>
+/**
+ * TODO:
+ * 1. end game
+ */
 
 class Player : public QObject
 {

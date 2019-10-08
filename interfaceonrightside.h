@@ -2,21 +2,18 @@
 #define INTERFACEONRIGHTSIDE_H
 
 #include <QStackedWidget>
-#include <QPushButton>
-#include <QLabel>
-#include <QVBoxLayout>
 
 #include "hex.h"
-#include "interfacewaitforclickhex.h"
-#include "interfacewithtoweroptions.h"
-#include "interfacetowerdetails.h"
+#include "widgetwaitforclickhex.h"
+#include "widgetwithtoweroptions.h"
+#include "widgettowerdetails.h"
 
 class InterfaceOnRightSide : public QStackedWidget
 {
 private:
-    InterfaceWaitForClickHex * interfaceWaitForClickHex = new InterfaceWaitForClickHex();
-    InterfaceWithTowerOptions * interfaceWithTowerOptions = new InterfaceWithTowerOptions();
-    InterfaceTowerDetails * interfaceTowerDetails = new InterfaceTowerDetails();
+    WidgetWaitForClickHex * widgetWaitForClickHex = new WidgetWaitForClickHex();
+    WidgetWithTowerOptions * widgetWithTowerOptions = new WidgetWithTowerOptions();
+    WidgetTowerDetails * widgetTowerDetails = new WidgetTowerDetails();
 
 public:
     InterfaceOnRightSide();
@@ -24,8 +21,8 @@ public:
     void setInterface(unsigned short interface) { setCurrentIndex(interface); }
     void setAllConnects();
 
-    InterfaceTowerDetails * getInterfaceTowerDetails() { return interfaceTowerDetails; }
-    InterfaceWithTowerOptions * getInterfaceWithTowerOptions() { return interfaceWithTowerOptions; }
+    WidgetWithTowerOptions * getInterfaceWithTowerOptions() { return widgetWithTowerOptions; }
+    WidgetTowerDetails * getWidgetTowerDetails() { return widgetTowerDetails; }
 };
 
 #endif // INTERFACEONRIGHTSIDE_H

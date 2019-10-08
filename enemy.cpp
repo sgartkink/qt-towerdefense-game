@@ -81,15 +81,6 @@ void Enemy::attackPlayer()
     game->player->decreaseHp(damage);
 }
 
-Enemy::~Enemy()
-{
-    moveTimer->stop();
-    disconnect(moveTimer, SIGNAL(timeout()), this, SLOT(moveForward()));
-    game->map->getScene()->removeItem(this);
-    game->map->getNewLevelEnemies()->decreaseEnemies();
-    game->player->increaseMoney(reward);
-}
-
 void Enemy::reduceHP(unsigned int reduction)
 {
     hp -= reduction;
@@ -101,4 +92,12 @@ void Enemy::checkIfEnemyStillExists()
 {
     if (hp <= 0)
         this->~Enemy();
+}
+
+Enemy::~Enemy()
+{
+    moveTimer->stop();
+    game->map->getScene()->removeItem(this);
+    game->map->getNewLevelEnemies()->decreaseEnemies();
+    game->player->increaseMoney(reward);
 }

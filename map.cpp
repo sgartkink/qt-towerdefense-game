@@ -38,29 +38,53 @@ void Map::createAllHexesAndAddToScene()
         }
 }
 
+void Map::setPathForEnemy()
+{
+    pathForEnemy = new PathForEnemy();
+}
+
 void Map::hexWasClicked(Hex *h)
 {
+    checkIfActiveHexHasTower();
+    checkIfActiveHexIsDifferentThanClickedHex(h);
+    checkIfActiveHexHasTowerOrPath();
+}
+
+void Map::checkIfActiveHexHasTower()
+{
     if (activeHex)
-        if (activeHex->hasTower())
+        if (activeHex->getTower())
             changeOpacityHexesOutOfReach(OPACITY_NORMAL, activeHex);
+}
 
-    if (activeHex != h)
-    {
-        deleteAndRemoveEffectFromScene();
-        activeHex = h;
-        createAndAddEffectToScene();
-    }
+void Map::checkIfActiveHexIsDifferentThanClickedHex(Hex *hex)
+{
+    if (activeHex != hex)
+        changeActiveHexAndSetEffectAgain(hex);
+}
 
-    if (activeHex->hasTower())
-    {
-        changeOpacityHexesOutOfReach(OPACITY_OUT_OF_REACH, activeHex);
-        game->interfaceOnTheRightSide->getInterfaceTowerDetails()->setActiveTower(activeHex->getTower());
-        game->interfaceOnTheRightSide->setInterface(INTERFACE_TOWER_DETAILS);
-    }
+void Map::changeActiveHexAndSetEffectAgain(Hex *hex)
+{
+    deleteAndRemoveEffectFromScene();
+    activeHex = hex;
+    createAndAddEffectToScene();
+}
+
+void Map::checkIfActiveHexHasTowerOrPath()
+{
+    if (activeHex->getTower())
+        changeOpacityAndRightInterface();
     else if (!activeHex->hasPath())
         game->interfaceOnTheRightSide->setInterface(INTERFACE_WITH_TOWER_OPTIONS_NR);
     else
         game->interfaceOnTheRightSide->setInterface(INTERFACE_WAIT_FOR_CLICK_HEX_NR);
+}
+
+void Map::changeOpacityAndRightInterface()
+{
+    changeOpacityHexesOutOfReach(OPACITY_OUT_OF_REACH, activeHex);
+    game->interfaceOnTheRightSide->getWidgetTowerDetails()->setActiveTower(activeHex->getTower());
+    game->interfaceOnTheRightSide->setInterface(INTERFACE_TOWER_DETAILS);
 }
 
 void Map::createAndAddEffectToScene()
@@ -85,7 +109,7 @@ void Map::changeOpacityHexesOutOfReach(qreal opacity, Hex *hex)
     for (int i = 0; i < MAP_SIZE; i++)
         for (int j = 0; j < MAP_SIZE; j++)
         {
-            if (hex->hasTower())
+            if (hex->getTower())
             if (!(distaneBetweenTwoHexes(vectorAllHexes[i][j], hex) <= hex->getTowerAttackRange() &&
                 distaneBetweenTwoHexes(vectorAllHexes[i][j], hex) != 0))
                 vectorAllHexes[i][j]->changeOpacity(opacity);
@@ -97,7 +121,7 @@ void Map::mousePressEvent(QMouseEvent *event)
     game->interfaceOnTheRightSide->setInterface(INTERFACE_WAIT_FOR_CLICK_HEX_NR);
     if (activeHex)
     {
-        if (activeHex->hasTower())
+        if (activeHex->getTower())
             changeOpacityHexesOutOfReach(OPACITY_NORMAL, activeHex);
         deleteAndRemoveEffectFromScene();
     }
@@ -109,14 +133,9 @@ unsigned int Map::distaneBetweenTwoHexes(Hex *a, Hex *b)
     return (abs(a->getXAxial() - b->getXAxial()) + abs(a->getY() - b->getY()) + abs(a->getZ() - b->getZ())) / 2;
 }
 
-void Map::setPathForEnemy()
-{
-    pathForEnemy = new PathForEnemy();
-}
-
 void Map::createTower(int nr)
 {
-    if (!activeHex->hasTower())
+    if (!activeHex->getTower())
     {
         Tower * tower = nullptr;
         switch(nr)
@@ -142,16 +161,13 @@ void Map::createTower(int nr)
         tower->setParentHex(activeHex);
         vectorAllTowers.append(tower);
 
-        activeHex->setHasTower(true);
         activeHex->setTower(tower);
 
         changeOpacityHexesOutOfReach(OPACITY_OUT_OF_REACH, activeHex);
 
-        QTimer * collisionTimer = new QTimer;
         connect(collisionTimer, SIGNAL(timeout()), this, SLOT(checkCollidings()));
-        collisionTimer->start(150);
 
-        game->interfaceOnTheRightSide->getInterfaceTowerDetails()->setActiveTower(activeHex->getTower());
+        game->interfaceOnTheRightSide->getWidgetTowerDetails()->setActiveTower(activeHex->getTower());
         game->interfaceOnTheRightSide->setInterface(INTERFACE_TOWER_DETAILS);
     }
 }
@@ -191,4 +207,19 @@ void Map::checkCollidings()
             if (enemyDestination)
                 (*itTower)->enemyTargeted(enemyDestination);
         }
+}
+
+void Map::startCollisionTimer()
+{
+    collisionTimer->start(150);
+}
+
+void Map::stopCollistionTimer()
+{
+    collisionTimer->stop();
+}
+
+Map::~Map()
+{
+    collisionTimer->stop();
 }

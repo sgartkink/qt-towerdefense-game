@@ -5,13 +5,14 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
-class InterfaceWaitForClickHex : public QWidget
+class WidgetWaitForClickHex : public QWidget
 {
 private:
     QVBoxLayout * vLayout = new QVBoxLayout();
     QLabel * textClick = new QLabel("Click any hex");
+
 public:
-    explicit InterfaceWaitForClickHex(QWidget *parent = nullptr);
+    explicit WidgetWaitForClickHex(QWidget *parent = nullptr);
 };
 
 #endif // INTERFACEWAITFORCLICKHEX_H

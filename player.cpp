@@ -34,9 +34,6 @@ void Player::decreaseHp(int decreased)
     hp -= decreased;
 
     game->interfaceOnBottom->updateHp();
-
-//    if (hp <= 0)
-        //end game
 }
 
 void Player::updateUpgradeAndBuyButtons()

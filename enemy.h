@@ -17,14 +17,14 @@ private:
 
     const unsigned int LENGTH_OF_MOVEMENT = 5;
     const unsigned int reward = 10;
-    const unsigned int damage = 1;
+    const unsigned short damage = 1;
     const QList<QPointF> pathPoints;
 
     int nr;
     int hp = 50;
     int pathPoints_index = 1; //because pathPoints[0] is (0,0)
-    QPointF destPoint;
     QTimer * moveTimer = new QTimer(this);
+    QPointF destPoint;
     QLineF lineToDestPoint;
 
     void rotateToPoint();
@@ -33,6 +33,7 @@ private:
     void setNewDestPointAndRotate();
     bool checkIfPathIsOver();
     void attackPlayer();
+    void checkIfEnemyStillExists();
 
 private slots:
     void moveForward();
@@ -45,7 +46,6 @@ public:
     int getHp() const { return hp; }
 
     void reduceHP(unsigned int reduction);
-    void checkIfEnemyStillExists();
 };
 
 #endif // ENEMY_H

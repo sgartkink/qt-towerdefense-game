@@ -2,8 +2,6 @@
 #define GAME_H
 
 #include <QWidget>
-#include <QGraphicsView>
-#include <QGraphicsScene>
 #include <QGridLayout>
 
 #include "map.h"
@@ -19,13 +17,13 @@ private:
     void configureLayout();
 
 public:
+    Game();
+
     QGridLayout * gridLayout = new QGridLayout();
     Map * map = new Map();
     Player * player = new Player();
     InterfaceOnRightSide * interfaceOnTheRightSide;
     InterfaceOnBottom * interfaceOnBottom;
-
-    Game();
 
     unsigned int getLevel() { return level; }
     void increaseLevelAndUpdateInterfaces();

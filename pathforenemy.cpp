@@ -56,7 +56,7 @@ QPointF PathForEnemy::addHexToPath(int x, int y)
 
 void PathForEnemy::changeHexColor(int x, int y)
 {
-    game->map->getHex(x,y)->changeHexBrushAndUpdate(PATH_COLOR);
+    game->map->getHex(x,y)->changeHexBrushColor(PATH_COLOR);
 }
 
 QPointF PathForEnemy::getHexCenter(int x, int y)

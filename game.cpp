@@ -6,8 +6,6 @@ Game::Game()
 
     map->createAllHexesAndAddToScene();
     gridLayout->addWidget(map,0,0);
-
-    setLayout(gridLayout);
 }
 
 void Game::configureLayout()
@@ -18,6 +16,8 @@ void Game::configureLayout()
     gridLayout->setColumnMinimumWidth(1,200);
     gridLayout->setRowMinimumHeight(0,580);
     gridLayout->setRowMinimumHeight(1,120);
+
+    setLayout(gridLayout);
 }
 
 void Game::configureInterfaces()

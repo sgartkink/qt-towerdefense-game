@@ -1,9 +1,9 @@
-#include "interfacewithtoweroptions.h"
+#include "widgetwithtoweroptions.h"
 
 #include "game.h"
 extern Game * game;
 
-InterfaceWithTowerOptions::InterfaceWithTowerOptions(QWidget *parent) : QWidget(parent)
+WidgetWithTowerOptions::WidgetWithTowerOptions(QWidget *parent) : QWidget(parent)
 {
     setLayout(vLayout);
 
@@ -14,7 +14,7 @@ InterfaceWithTowerOptions::InterfaceWithTowerOptions(QWidget *parent) : QWidget(
     vLayout->addWidget(widgetDarkCyanTowerOptions);
 }
 
-void InterfaceWithTowerOptions::setAllButtonConnects()
+void WidgetWithTowerOptions::setAllButtonConnects()
 {
     connect(widgetBlueTowerOptions->getButton(), &QPushButton::clicked, [](){ game->map->createTower(BLUE_TOWER_NR); });
     connect(widgetGreenTowerOptions->getButton(), &QPushButton::clicked, [](){ game->map->createTower(GREEN_TOWER_NR); });
@@ -23,7 +23,7 @@ void InterfaceWithTowerOptions::setAllButtonConnects()
     connect(widgetDarkCyanTowerOptions->getButton(), &QPushButton::clicked, [](){ game->map->createTower(DARKCYAN_TOWER_NR); });
 }
 
-void InterfaceWithTowerOptions::updateButtons()
+void WidgetWithTowerOptions::updateButtons()
 {
     widgetBlueTowerOptions->updateButton();
     widgetGreenTowerOptions->updateButton();
