@@ -17,7 +17,6 @@ private:
     QTimer * timerCreateNewEnemy = new QTimer(this);
     unsigned int enemiesCount = 0;
     unsigned int enemiesLeft;
-    bool isRunningLevel = false;
     QVector<QVector<unsigned int>> vectorEnemies;
 
     void createAllLevels();
@@ -30,7 +29,6 @@ public:
     NewLevelEnemies();
 
     unsigned int getEnemiesLeft() { return enemiesLeft; }
-    bool getIsRunningLevel() { return isRunningLevel; }
 
     void decreaseEnemies();
     void updateQLCDNumberEnemiesLeft();

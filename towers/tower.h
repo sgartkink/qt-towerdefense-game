@@ -21,13 +21,14 @@ private:
     unsigned int attackRange;
     Hex * parentHex;
 
+    void createNewTowerSquare();
+
 protected:
     short currentLevel = 1;
     QVector<unsigned int> vectorDamage;
     TowerRangeAttack * towerRangeAttack;
 
     void setBulletPosAndAddToScene(Bullet * bullet);
-    void createNewTowerSquare();
 
 public:
     Tower(unsigned int range, Qt::GlobalColor color, QPointF towerPosition_);
@@ -38,8 +39,10 @@ public:
     short getCurrentLevel() { return currentLevel; }
     unsigned int getDamage() { return vectorDamage[currentLevel-1]; }
     unsigned int getPrice(unsigned short vectorTowerPrices_NR) { return VECTOR_TOWER_PRICES[vectorTowerPrices_NR][currentLevel]; }
+    TowerRangeAttack * getTowerRangeAttack() { return towerRangeAttack; }
 
     void setParentHex(Hex * h) { parentHex = h; }
+    void setTowerRangeAttackVisibility(bool visible) { towerRangeAttack->setVisible(visible); }
 
     virtual void enemyTargeted(Enemy *e) = 0;
 

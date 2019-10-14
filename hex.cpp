@@ -26,6 +26,9 @@ Hex::Hex(int x_, int y_)
 void Hex::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     game->map->hexWasClicked(this);
+
+    if (tower)
+        tower->setTowerRangeAttackVisibility(true);
 }
 
 void Hex::hoverEnterEvent(QGraphicsSceneHoverEvent *event)

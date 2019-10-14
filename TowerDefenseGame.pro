@@ -53,7 +53,8 @@ SOURCES += \
     towers/towersquareobject.cpp \
     widgettowerdetails.cpp \
     widgetwaitforclickhex.cpp \
-    widgetwithtoweroptions.cpp
+    widgetwithtoweroptions.cpp \
+    towerrangeattackelement.cpp
 
 HEADERS += \
     hex.h \
@@ -85,7 +86,8 @@ HEADERS += \
     towers/towersquareobject.h \
     widgettowerdetails.h \
     widgetwaitforclickhex.h \
-    widgetwithtoweroptions.h
+    widgetwithtoweroptions.h \
+    towerrangeattackelement.h
 
 FORMS +=
 

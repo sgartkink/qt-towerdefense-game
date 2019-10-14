@@ -6,6 +6,9 @@ extern Game * game;
 Tower::Tower(unsigned int range, Qt::GlobalColor color, QPointF towerPosition_)
     : towerColor(color), towerPosition(towerPosition_), attackRange(range)
 {
+    towerRangeAttack = new TowerRangeAttack(range, towerPosition);
+    game->map->getScene()->addItem(towerRangeAttack);
+
     createNewTowerSquare();
 }
 

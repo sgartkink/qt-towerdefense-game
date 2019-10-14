@@ -3,7 +3,7 @@
 BlueTower::BlueTower(QPointF towerPosition)
     : Tower(2, Qt::blue, towerPosition)
 {
-    vectorDamage = { 30, 20, 30, 40, 50 };
+    vectorDamage = { 1, 20, 30, 40, 50 };
 }
 
 void BlueTower::enemyTargeted(Enemy *aimEnemy)

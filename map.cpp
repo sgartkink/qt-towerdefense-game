@@ -16,6 +16,8 @@ Map::Map()
     layout->setMargin(0);
     layout->addWidget(view);
     setLayout(layout);
+
+    connect(collisionTimer, SIGNAL(timeout()), this, SLOT(checkCollidings()));
 }
 
 void Map::createAllHexesAndAddToScene()
@@ -54,7 +56,10 @@ void Map::checkIfActiveHexHasTower()
 {
     if (activeHex)
         if (activeHex->getTower())
+        {
             changeOpacityHexesOutOfReach(OPACITY_NORMAL, activeHex);
+            activeHex->getTower()->setTowerRangeAttackVisibility(false);
+        }
 }
 
 void Map::checkIfActiveHexIsDifferentThanClickedHex(Hex *hex)
@@ -122,7 +127,10 @@ void Map::mousePressEvent(QMouseEvent *event)
     if (activeHex)
     {
         if (activeHex->getTower())
+        {
             changeOpacityHexesOutOfReach(OPACITY_NORMAL, activeHex);
+            activeHex->getTower()->setTowerRangeAttackVisibility(false);
+        }
         deleteAndRemoveEffectFromScene();
     }
     activeHex = nullptr;
@@ -165,8 +173,6 @@ void Map::createTower(int nr)
 
         changeOpacityHexesOutOfReach(OPACITY_OUT_OF_REACH, activeHex);
 
-        connect(collisionTimer, SIGNAL(timeout()), this, SLOT(checkCollidings()));
-
         game->interfaceOnTheRightSide->getWidgetTowerDetails()->setActiveTower(activeHex->getTower());
         game->interfaceOnTheRightSide->setInterface(INTERFACE_TOWER_DETAILS);
     }
@@ -174,39 +180,28 @@ void Map::createTower(int nr)
 
 void Map::checkCollidings()
 {
-    if (newLevelEnemies->getIsRunningLevel())
-        for (auto itTower = vectorAllTowers.begin(); itTower != vectorAllTowers.end(); ++itTower)
+    for (auto itTower = vectorAllTowers.begin(); itTower != vectorAllTowers.end(); ++itTower)
+    {
+        Enemy * enemyDestination = nullptr;
+
+        QList<QGraphicsItem *> colliding_items = (*itTower)->getTowerRangeAttack()->collidingItems();
+        for (int i = 0; i < colliding_items.size(); i++)
         {
-            Enemy * enemyDestination = nullptr;
+            Enemy * currentlyCheckedEnemy = dynamic_cast<Enemy *>(colliding_items[i]);
 
-            QVector<Hex*> vectorHexesInRange;
-            for (int i = 0; i < MAP_SIZE; i++)
-                for (int j = 0; j < MAP_SIZE; j++)
-                    if (distaneBetweenTwoHexes(vectorAllHexes[i][j], (*itTower)->getParentHex()) <= (*itTower)->getAttackRange() &&
-                        distaneBetweenTwoHexes(vectorAllHexes[i][j], (*itTower)->getParentHex()) != 0)
-                        vectorHexesInRange.append(vectorAllHexes[i][j]);
-
-            for (auto itHex = vectorHexesInRange.begin(); itHex != vectorHexesInRange.end(); ++itHex)
+            if (currentlyCheckedEnemy)
             {
-                QList<QGraphicsItem *> colliding_items = (*itHex)->collidingItems();
-                for (int i = 0; i < colliding_items.size(); i++)
-                {
-                    Enemy * currentlyCheckedEnemy = dynamic_cast<Enemy *>(colliding_items[i]);
+                if (!enemyDestination)
+                    enemyDestination = currentlyCheckedEnemy;
 
-                    if (currentlyCheckedEnemy)
-                    {
-                        if (!enemyDestination)
-                            enemyDestination = currentlyCheckedEnemy;
-
-                        if (currentlyCheckedEnemy->getNr() < enemyDestination->getNr())
-                            enemyDestination = currentlyCheckedEnemy;
-                    }
-                }
+                if (currentlyCheckedEnemy->getNr() < enemyDestination->getNr())
+                    enemyDestination = currentlyCheckedEnemy;
             }
-
-            if (enemyDestination)
-                (*itTower)->enemyTargeted(enemyDestination);
         }
+
+        if (enemyDestination)
+            (*itTower)->enemyTargeted(enemyDestination);
+    }
 }
 
 void Map::startCollisionTimer()

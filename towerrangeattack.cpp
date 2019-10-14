@@ -1,91 +1,111 @@
 #include "towerrangeattack.h"
-#include <QPen>
-#include <QPen>
 #include <QtDebug>
-TowerRangeAttack::TowerRangeAttack(unsigned int r, double x_, double y_)
+
+#include "game.h"
+extern Game * game;
+
+TowerRangeAttack::TowerRangeAttack(unsigned int r, QPointF hexPosition)
     : range(r)
 {    
-    QVector<QPointF> hexPoints;
-
-    QPen pen(Qt::red);
-    double angle_deg, angle_rad;
-    for (unsigned int i = 0; i < range; i++)
-    {
-        angle_deg = 60 * 1 - 30;
-        angle_rad = M_PI / 180 * angle_deg;
-        QPointF p0(x_ - HEX_SIZE * cos(angle_rad) + HEX_SIZE/2 - HEX_SIZE*sqrt(3)*range + HEX_SIZE*sqrt(3)*i/2,
-                   y_ - HEX_SIZE * sin(angle_rad) + HEX_SIZE/2 - HEX_SIZE*i*2/2 - HEX_SIZE/2*i);
-        hexPoints << p0;
-        angle_deg = 60 * 2 - 30;
-        angle_rad = M_PI / 180 * angle_deg;
-        QPointF p1(x_ - HEX_SIZE * cos(angle_rad) + HEX_SIZE/2 - HEX_SIZE*sqrt(3)*range + HEX_SIZE*sqrt(3)*i/2,
-                   y_ - HEX_SIZE * sin(angle_rad) + HEX_SIZE/2 - HEX_SIZE*i*2/2 - HEX_SIZE/2*i);
-        hexPoints << p1;
-        angle_deg = 60 * 2 - 30;
-        angle_rad = M_PI / 180 * angle_deg;
-        QPointF p2(x_ - HEX_SIZE * cos(angle_rad) + HEX_SIZE/2 - HEX_SIZE*sqrt(3)*range + HEX_SIZE*sqrt(3)*i/2,
-                   y_ - HEX_SIZE * sin(angle_rad) + HEX_SIZE/2 - HEX_SIZE*(i+1) - HEX_SIZE/2*i);
-        hexPoints << p2;
-        QLineF ln1 = QLineF(p0,p1);
-        QLineF ln2 = QLineF(p1,p2);
-        QGraphicsLineItem * l1 = new QGraphicsLineItem(ln1);
-        QGraphicsLineItem * l2 = new QGraphicsLineItem(ln2);
-        l1->setPen(pen);
-        l2->setPen(pen);
-    }
-
-//    unsigned int i = range;
-//    for (unsigned int j = 0; j < range+1; j++)
-//    {
-//        angle_deg = 60 * 1 - 30;
-//        angle_rad = M_PI / 180 * angle_deg;
-//        QPointF p0(x_ - HEX_SIZE * cos(angle_rad) + HEX_SIZE/2 - HEX_SIZE*sqrt(3)*range + HEX_SIZE*sqrt(3)*i/2 + HEX_SIZE*sqrt(3)*j,
-//                   y_ - HEX_SIZE * sin(angle_rad) + HEX_SIZE/2 - HEX_SIZE*i*2/2 - HEX_SIZE/2*i);
-//        hexPoints << p0;
-//        angle_deg = 60 * 2 - 30;
-//        angle_rad = M_PI / 180 * angle_deg;
-//        QPointF p1(x_ - HEX_SIZE * cos(angle_rad) + HEX_SIZE/2 - HEX_SIZE*sqrt(3)*range + HEX_SIZE*sqrt(3)*i/2 + HEX_SIZE*sqrt(3)*j,
-//                   y_ - HEX_SIZE * sin(angle_rad) + HEX_SIZE/2 - HEX_SIZE*i*2/2 - HEX_SIZE/2*i);
-//        hexPoints << p1;
-//        angle_deg = 60 * 4 - 30;
-//        angle_rad = M_PI / 180 * angle_deg;
-//        QPointF p2(x_ - HEX_SIZE * cos(angle_rad) + HEX_SIZE/2 - HEX_SIZE*sqrt(3)*range + HEX_SIZE*sqrt(3)*i/2 + HEX_SIZE*sqrt(3)*j,
-//                   y_ - HEX_SIZE * sin(angle_rad) + HEX_SIZE/2 - HEX_SIZE*(i+1) - HEX_SIZE/2*i);
-//        hexPoints << p2;
-//        QLineF ln1 = QLineF(p0,p1);
-//        QLineF ln2 = QLineF(p1,p2);
-//        QGraphicsLineItem * l1 = new QGraphicsLineItem(ln1);
-//        QGraphicsLineItem * l2 = new QGraphicsLineItem(ln2);
-//        l1->setPen(pen);
-//        l2->setPen(pen);
-//    }
-
-//    for (int i = range-1, j = range+1; i >= 0; i--, j++)
-//    {
-//        angle_deg = 60 * 2 - 30;
-//        angle_rad = M_PI / 180 * a + HEX_SIZE/2 - HEX_SIZE*i*2/2 - HEX_SIZE/2*i)ngle_deg;
-//        QPointF p0(x_ - HEX_SIZE * cos(angle_rad) + HEX_SIZE/2 - HEX_SIZE*sqrt(3)*range + HEX_SIZE*sqrt(3)*i/2 + HEX_SIZE*sqrt(3)*j,
-//                   y_ - HEX_SIZE * sin(angle_rad) + HEX_SIZE/2 - HEX_SIZE*(i+1) - HEX_SIZE/2*i);
-//        hexPoints << p0;
-//        angle_deg = 60 * 2 - 30;
-//        angle_rad = M_PI / 180 * angle_deg;
-//        QPointF p1(x_ - HEX_SIZE * cos(angle_rad) + HEX_SIZE/2 - HEX_SIZE*sqrt(3)*range + HEX_SIZE*sqrt(3)*i/2 + HEX_SIZE*sqrt(3)*j,
-//                   y_ - HEX_SIZE * sin(angle_rad) + HEX_SIZE/2 - HEX_SIZE*i*2/2 - HEX_SIZE/2*i);
-//        hexPoints << p1;
-//        angle_deg = 60 * 3 - 30;
-//        angle_rad = M_PI / 180 * angle_deg;
-//        QPointF p2(x_ - HEX_SIZE * cos(angle_rad) + HEX_SIZE/2 - HEX_SIZE*sqrt(3)*range + HEX_SIZE*sqrt(3)*i/2 + HEX_SIZE*sqrt(3)*j,
-//                   y_ - HEX_SIZE * sin(angle_rad) + HEX_SIZE/2 - HEX_SIZE*i*2/2 - HEX_SIZE/2*i);
-//        hexPoints << p2;
-//        QLineF ln1 = QLineF(p0,p1);
-//        QLineF ln2 = QLineF(p1,p2);
-//        QGraphicsLineItem * l1 = new QGraphicsLineItem(ln1);
-//        QGraphicsLineItem * l2 = new QGraphicsLineItem(ln2);
-//        l1->setPen(pen);
-//        l2->setPen(pen);
-//    }
-
     setPen(pen);
+
+    for (int i = 0; i <= r; i++)
+        createLeftUpElement(HEX_SIZE*sqrt(3)/2*i, -HEX_SIZE*3/2*i);
+
+    setNewLastPoint();
+    for (int  i = 0; i < r; i++)
+        createUpElement(HEX_SIZE*sqrt(3)*i, 0);
+
+    setNewLastPoint();
+    for (int i = 0; i < r; i++)
+        createRightUpElement(HEX_SIZE*sqrt(3)/2*i, HEX_SIZE*3/2*i);
+
+    setNewLastPoint();
+    for (int i = 0; i <= r; i++)
+        createRightDownElement(HEX_SIZE*sqrt(3)/2*i, HEX_SIZE*3/2*i);
+
+    setNewLastPoint();
+    for (int i = 0; i < r; i++)
+        createDownElement(HEX_SIZE*sqrt(3)*i, 0);
+
+    setNewLastPoint();
+    for (int i = 0; i < r; i++)
+        createLeftDownElement(HEX_SIZE*sqrt(3)/2*i, HEX_SIZE*3/2*i);
+
+    setPos(hexPosition.x() - r * HEX_SIZE*sqrt(3),
+           hexPosition.y());
+
     QPolygonF hexagon(hexPoints);
     setPolygon(hexagon);
+}
+
+void TowerRangeAttack::setNewLastPoint()
+{
+    lastPoint.setX(hexPoints[hexPoints.length()-1].x());
+    lastPoint.setY(hexPoints[hexPoints.length()-1].y());
+}
+
+void TowerRangeAttack::createLeftUpElement(double addedX, double addedY)
+{
+    double addToX = HEX_SIZE/2 + addedX;
+    double addToY = HEX_SIZE/2 + addedY;
+
+    createAllPoints(QVector<unsigned short> {0,1,2}, addToX, addToY);
+}
+
+void TowerRangeAttack::createUpElement(double addedX, double addedY)
+{
+    double addToX = lastPoint.x() + HEX_SIZE - 5 + addedX;
+    double addToY = lastPoint.y() - HEX_SIZE/2 + addedY;
+
+    createAllPoints(QVector<unsigned short> {6,5,4}, addToX, addToY);
+}
+
+void TowerRangeAttack::createRightUpElement(double addedX, double addedY)
+{
+    double addToX = lastPoint.x() + HEX_SIZE*3/2 + 10 + addedX;
+    double addToY = lastPoint.y() + HEX_SIZE + addedY;
+
+    createAllPoints(QVector<unsigned short> {1,0,5}, addToX, addToY);
+}
+
+void TowerRangeAttack::createRightDownElement(double addedX, double addedY)
+{
+    double addToX = lastPoint.x() - HEX_SIZE*sqrt(3)/2 - addedX;
+    double addToY = lastPoint.y() + HEX_SIZE/2 + addedY;
+
+    createAllPoints(QVector<unsigned short> {3,4,5}, addToX, addToY);
+}
+
+void TowerRangeAttack::createDownElement(double addedX, double addedY)
+{
+    double addToX = lastPoint.x() - HEX_SIZE/2 - 12 - addedX;
+    double addToY = lastPoint.y() + HEX_SIZE/2 + addedY;
+
+    createAllPoints(QVector<unsigned short> {3,2,1}, addToX, addToY);
+}
+
+void TowerRangeAttack::createLeftDownElement(double addedX, double addedY)
+{    
+    double addToX = lastPoint.x() - 5 - addedX;
+    double addToY = lastPoint.y() - HEX_SIZE - addedY;
+
+    createAllPoints(QVector<unsigned short> {5,6,1}, addToX, addToY);
+}
+
+void TowerRangeAttack::createAllPoints(QVector<unsigned short> anglePoints, double addToX, double addToY)
+{
+    hexPoints << createPoint(anglePoints[0], addToX, addToY);
+    hexPoints << createPoint(anglePoints[1], addToX, addToY);
+    hexPoints << createPoint(anglePoints[2], addToX, addToY);
+}
+
+QPointF TowerRangeAttack::createPoint(unsigned short anglePoint, double addToX, double addToY)
+{
+    double angle_deg, angle_rad;
+
+    angle_deg = 60 * anglePoint - 30;
+    angle_rad = M_PI / 180 * angle_deg;
+    return QPointF (x() - HEX_SIZE * cos(angle_rad) + addToX,
+               y() - HEX_SIZE * sin(angle_rad) + addToY);
 }

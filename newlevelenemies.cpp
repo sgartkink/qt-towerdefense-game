@@ -13,8 +13,8 @@ NewLevelEnemies::NewLevelEnemies()
 
 void NewLevelEnemies::createAllLevels()
 {
-    vectorEnemies[0].push_back(10);
-    vectorEnemies[0].push_back(150);
+    vectorEnemies[0].push_back(100); //enemies
+    vectorEnemies[0].push_back(150); //frequency
 
     vectorEnemies[1].push_back(15);
     vectorEnemies[1].push_back(500);
@@ -24,7 +24,6 @@ void NewLevelEnemies::startNewLevel()
 {
     enemiesLeft = vectorEnemies[game->getLevel()-1][NR_ENEMIES_IN_VECTOR];
     enemiesCount = enemiesLeft;
-    isRunningLevel = true;
 
     connect(timerCreateNewEnemy, SIGNAL(timeout()), this, SLOT(createNewEnemy()));
     timerCreateNewEnemy->start(vectorEnemies[game->getLevel()-1][NR_FREQUENCY_CREATING_ENEMIES]);
@@ -79,6 +78,5 @@ void NewLevelEnemies::endLevel()
 {
     game->interfaceOnBottom->setButtonStartGameEnabled(true);
     game->increaseLevelAndUpdateInterfaces();
-    isRunningLevel = false;
     game->map->stopCollistionTimer();
 }

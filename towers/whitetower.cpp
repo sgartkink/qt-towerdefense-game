@@ -6,7 +6,7 @@ extern Game * game;
 WhiteTower::WhiteTower(QPointF towerPosition)
     : Tower(3, Qt::white, towerPosition)
 {
-    vectorDamage = { 10, 20, 30, 40, 50 };
+    vectorDamage = { 1, 20, 30, 40, 50 };
 }
 
 void WhiteTower::enemyTargeted(Enemy *aimEnemy)
