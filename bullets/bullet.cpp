@@ -40,7 +40,6 @@ void Bullet::moveBulletTowardsAim()
     checkIfBulletIsCloseEnoughAim();
 }
 
-
 void Bullet::rotateToAim()
 {
     updateLine();
@@ -54,7 +53,7 @@ void Bullet::updateLine()
 
 void Bullet::checkIfBulletIsCloseEnoughAim()
 {
-    if (lineFromBulletToAim.length() < 10)
+    if (lineFromBulletToAim.length() < LENGTH_OF_MOVEMENT)
     {
         aim->reduceHP(damage);
         timerForCheckingAim->stop();

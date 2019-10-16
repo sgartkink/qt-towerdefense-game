@@ -9,6 +9,9 @@
 #include <QTimer>
 #include <QtMath>
 
+#include "hpbarenemyframe.h"
+#include "hpbarenemyfill.h"
+
 class Enemy : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
@@ -21,12 +24,15 @@ private:
     const QList<QPointF> pathPoints;
 
     int nr;
-    int hp = 50;
+    int hp = 20;
     int pathPoints_index = 1; //because pathPoints[0] is (0,0)
+    HPBarEnemyFrame * hpBarEnemyFrame = new HPBarEnemyFrame();
+    HPBarEnemyFill * hpBarEnemyFill = new HPBarEnemyFill(hp);
     QTimer * moveTimer = new QTimer(this);
     QPointF destPoint;
     QLineF lineToDestPoint;
 
+    void setHPBarPosBasedOnRotation();
     void rotateToPoint();
     void updateLine();
     void checkIfEnemyIsCloseEnoughToNextPoint();

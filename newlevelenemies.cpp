@@ -13,8 +13,8 @@ NewLevelEnemies::NewLevelEnemies()
 
 void NewLevelEnemies::createAllLevels()
 {
-    vectorEnemies[0].push_back(100); //enemies
-    vectorEnemies[0].push_back(150); //frequency
+    vectorEnemies[0].push_back(1); //enemies
+    vectorEnemies[0].push_back(1500); //frequency
 
     vectorEnemies[1].push_back(15);
     vectorEnemies[1].push_back(500);

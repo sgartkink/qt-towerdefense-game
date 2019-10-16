@@ -19,6 +19,12 @@ Enemy::Enemy()
     destPoint = pathPoints[pathPoints_index];
     rotateToPoint();
 
+    game->map->getScene()->addItem(hpBarEnemyFrame);
+    hpBarEnemyFrame->setPos(x() - ENEMY_SIZE/2, y()-10);
+
+    game->map->getScene()->addItem(hpBarEnemyFill);
+    hpBarEnemyFill->setPos(x() - ENEMY_SIZE/2, y()-10);
+
     connect(moveTimer, SIGNAL(timeout()), this, SLOT(moveForward()));
     moveTimer->start(150);
 }
@@ -34,7 +40,28 @@ void Enemy::moveForward()
 
     setPos(x()+dx, y()+dy);
 
+    setHPBarPosBasedOnRotation();
+
     checkIfEnemyIsCloseEnoughToNextPoint();
+}
+
+void Enemy::setHPBarPosBasedOnRotation()
+{
+    if (rotation() > -10 || rotation() < -350)
+    {
+        hpBarEnemyFrame->setPos(x() - ENEMY_SIZE/2, y() - ENEMY_SIZE);
+        hpBarEnemyFill->setPos(x() - ENEMY_SIZE/2, y() - ENEMY_SIZE);
+    }
+    else if (rotation() < -50 && rotation() > -130)
+    {
+        hpBarEnemyFrame->setPos(x() - ENEMY_SIZE/2, y()-10 - HEX_SIZE/2);
+        hpBarEnemyFill->setPos(x() - ENEMY_SIZE/2, y()-10 - HEX_SIZE/2);
+    }
+    else
+    {
+        hpBarEnemyFrame->setPos(x() - ENEMY_SIZE/2, y()-ENEMY_SIZE/2);
+        hpBarEnemyFill->setPos(x() - ENEMY_SIZE/2, y()-ENEMY_SIZE/2);
+    }
 }
 
 void Enemy::rotateToPoint()
@@ -86,6 +113,8 @@ void Enemy::reduceHP(unsigned int reduction)
     hp -= reduction;
 
     checkIfEnemyStillExists();
+
+    hpBarEnemyFill->changeRect(hp);
 }
 
 void Enemy::checkIfEnemyStillExists()
@@ -96,8 +125,12 @@ void Enemy::checkIfEnemyStillExists()
 
 Enemy::~Enemy()
 {
-    moveTimer->stop();
+    game->map->getScene()->removeItem(hpBarEnemyFrame);
+    game->map->getScene()->removeItem(hpBarEnemyFill);
     game->map->getScene()->removeItem(this);
     game->map->getNewLevelEnemies()->decreaseEnemies();
-    game->player->increaseMoney(reward);
+    moveTimer->stop();
+
+    if (hp <= 0)
+        game->player->increaseMoney(reward);
 }

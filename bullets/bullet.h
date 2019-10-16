@@ -15,7 +15,7 @@ class Bullet : public QObject, public QGraphicsEllipseItem
     Q_OBJECT
 
 private:
-    const int LENGTH_OF_MOVEMENT = 5;
+    const int LENGTH_OF_MOVEMENT = 15;
 
     Enemy * aim;
     QLineF lineFromBulletToAim;

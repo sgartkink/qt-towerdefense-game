@@ -18,13 +18,6 @@
 #include "towers/whitetower.h"
 #include "towers/yellowtower.h"
 
-/**
- * TODO:
- * 1. check collidings works but it needs a lot of optimalization
- * range for each tower should be calculated once
- * it should be done in class TowerRangeAttack
- */
-
 class Map : public QWidget
 {
     Q_OBJECT
