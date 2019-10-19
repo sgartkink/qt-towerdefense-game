@@ -40,18 +40,19 @@ private:
     bool checkIfPathIsOver();
     void attackPlayer();
     void checkIfEnemyStillExists();
+    void deleteEnemy();
 
 private slots:
     void moveForward();
 
 public:
     Enemy();
-    ~Enemy();
 
     int getNr() { return nr; }
     int getHp() const { return hp; }
 
     void reduceHP(unsigned int reduction);
+    void resetEnemyCount() { enemyCount = 0; }
 };
 
 #endif // ENEMY_H

@@ -32,7 +32,6 @@ private:
     ChosenHexEffect * effect = nullptr;
     QVector<QVector <Hex*>> vectorAllHexes;
     QVector<Tower*> vectorAllTowers;
-    QVector<Enemy*> vectorAllEnemies;
 
     void createAndAddEffectToScene();
     void deleteAndRemoveEffectFromScene();

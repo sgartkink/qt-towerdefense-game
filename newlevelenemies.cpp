@@ -13,10 +13,10 @@ NewLevelEnemies::NewLevelEnemies()
 
 void NewLevelEnemies::createAllLevels()
 {
-    vectorEnemies[0].push_back(1); //enemies
-    vectorEnemies[0].push_back(1500); //frequency
+    vectorEnemies[0].push_back(10); //enemies
+    vectorEnemies[0].push_back(250); //frequency
 
-    vectorEnemies[1].push_back(15);
+    vectorEnemies[1].push_back(50);
     vectorEnemies[1].push_back(500);
 }
 
@@ -24,6 +24,7 @@ void NewLevelEnemies::startNewLevel()
 {
     enemiesLeft = vectorEnemies[game->getLevel()-1][NR_ENEMIES_IN_VECTOR];
     enemiesCount = enemiesLeft;
+    vectorAllEnemies.resize(0);
 
     connect(timerCreateNewEnemy, SIGNAL(timeout()), this, SLOT(createNewEnemy()));
     timerCreateNewEnemy->start(vectorEnemies[game->getLevel()-1][NR_FREQUENCY_CREATING_ENEMIES]);
@@ -37,6 +38,7 @@ void NewLevelEnemies::createNewEnemy()
 {
     Enemy * enemy = new Enemy();
     game->map->getScene()->addItem(enemy);
+    vectorAllEnemies.push_back(enemy);
 
     enemiesCount--;
     checkIfAllEnemiesAreCreated();
@@ -79,4 +81,9 @@ void NewLevelEnemies::endLevel()
     game->interfaceOnBottom->setButtonStartGameEnabled(true);
     game->increaseLevelAndUpdateInterfaces();
     game->map->stopCollistionTimer();
+
+    vectorAllEnemies[0]->resetEnemyCount();
+    for (auto it = vectorAllEnemies.begin(); it != vectorAllEnemies.end(); ++it)
+        delete (*it);
+    vectorAllEnemies.resize(0);
 }

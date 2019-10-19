@@ -18,6 +18,7 @@ private:
     unsigned int enemiesCount = 0;
     unsigned int enemiesLeft;
     QVector<QVector<unsigned int>> vectorEnemies;
+    QVector<Enemy *> vectorAllEnemies;
 
     void createAllLevels();
     void checkIfAllEnemiesAreCreated();

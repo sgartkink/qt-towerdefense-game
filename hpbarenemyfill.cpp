@@ -11,13 +11,18 @@ HPBarEnemyFill::HPBarEnemyFill(int MAX_HP_)
 
 void HPBarEnemyFill::changeRect(int currentHP)
 {
-    float divideCurrentMax = currentHP*100/MAX_HP;
-    if (divideCurrentMax < 25)
-        brush.setColor(Qt::red);
-    else if (divideCurrentMax < 50)
-        brush.setColor(Qt::yellow);
+    try {
+        qreal divideCurrentMax = currentHP*100/MAX_HP;
+        if (divideCurrentMax < 25)
+            brush.setColor(Qt::red);
+        else if (divideCurrentMax < 50)
+            brush.setColor(Qt::yellow);
 
-    setBrush(brush);
+        setBrush(brush);
 
-    setRect(0,0,30*divideCurrentMax/100,10);
+        setRect(0,0,30*divideCurrentMax/100,10);
+    } catch (...) {
+        qDebug() << "test";
+    }
+
 }

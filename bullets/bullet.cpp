@@ -23,7 +23,10 @@ void Bullet::checkExistenceOfAim()
     if (aim->scene())
         moveBulletTowardsAim();
     else
+    {
+        timerForCheckingAim->stop();
         delete this;
+    }
 }
 
 void Bullet::moveBulletTowardsAim()

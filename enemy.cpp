@@ -97,6 +97,7 @@ bool Enemy::checkIfPathIsOver()
     if (pathPoints_index >= pathPoints.size())
     {
         attackPlayer();
+        game->map->getNewLevelEnemies()->decreaseEnemies();
         this->~Enemy();
         return true;
     }
@@ -112,24 +113,25 @@ void Enemy::reduceHP(unsigned int reduction)
 {
     hp -= reduction;
 
-    checkIfEnemyStillExists();
-
-    hpBarEnemyFill->changeRect(hp);
+    if (hp > 0)
+        hpBarEnemyFill->changeRect(hp);
+    else
+        deleteEnemy();
 }
 
 void Enemy::checkIfEnemyStillExists()
 {
     if (hp <= 0)
-        this->~Enemy();
+        deleteEnemy();
 }
 
-Enemy::~Enemy()
+void Enemy::deleteEnemy()
 {
+    moveTimer->stop();
     game->map->getScene()->removeItem(hpBarEnemyFrame);
     game->map->getScene()->removeItem(hpBarEnemyFill);
     game->map->getScene()->removeItem(this);
     game->map->getNewLevelEnemies()->decreaseEnemies();
-    moveTimer->stop();
 
     if (hp <= 0)
         game->player->increaseMoney(reward);

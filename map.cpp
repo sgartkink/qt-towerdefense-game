@@ -10,6 +10,7 @@ Map::Map()
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setScene(scene);
+    view->setAlignment(Qt::AlignHCenter);
     view->show();
 
     layout->setSpacing(0);
