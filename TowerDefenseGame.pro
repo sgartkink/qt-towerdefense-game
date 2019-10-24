@@ -54,7 +54,6 @@ SOURCES += \
     widgettowerdetails.cpp \
     widgetwaitforclickhex.cpp \
     widgetwithtoweroptions.cpp \
-    towerrangeattackelement.cpp \
     hpbarenemyframe.cpp \
     hpbarenemyfill.cpp
 
@@ -89,7 +88,6 @@ HEADERS += \
     widgettowerdetails.h \
     widgetwaitforclickhex.h \
     widgetwithtoweroptions.h \
-    towerrangeattackelement.h \
     hpbarenemyframe.h \
     hpbarenemyfill.h
 

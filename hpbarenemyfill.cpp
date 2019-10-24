@@ -1,5 +1,5 @@
 #include "hpbarenemyfill.h"
-#include <QtDebug>
+
 HPBarEnemyFill::HPBarEnemyFill(int MAX_HP_)
     : MAX_HP(MAX_HP_)
 {
@@ -11,18 +11,13 @@ HPBarEnemyFill::HPBarEnemyFill(int MAX_HP_)
 
 void HPBarEnemyFill::changeRect(int currentHP)
 {
-    try {
-        qreal divideCurrentMax = currentHP*100/MAX_HP;
-        if (divideCurrentMax < 25)
-            brush.setColor(Qt::red);
-        else if (divideCurrentMax < 50)
-            brush.setColor(Qt::yellow);
+    qreal divideCurrentMax = currentHP*100/MAX_HP;
+    if (divideCurrentMax < 25)
+        brush.setColor(Qt::red);
+    else if (divideCurrentMax < 50)
+        brush.setColor(Qt::yellow);
 
-        setBrush(brush);
+    setBrush(brush);
 
-        setRect(0,0,30*divideCurrentMax/100,10);
-    } catch (...) {
-        qDebug() << "test";
-    }
-
+    setRect(0,0,30*divideCurrentMax/100,10);
 }

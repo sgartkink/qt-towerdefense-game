@@ -5,7 +5,6 @@
 #include <QtMath>
 #include <QPen>
 
-#include "towerrangeattackelement.h"
 #include "global_consts.h"
 
 class TowerRangeAttack : public QGraphicsPolygonItem
@@ -13,8 +12,10 @@ class TowerRangeAttack : public QGraphicsPolygonItem
 private:
     unsigned int range;
     QPointF lastPoint;
+    QPointF hexPosition;
     QPen pen = QPen(Qt::red);
-    QVector<QPointF> hexPoints;
+    QVector<QPointF> hexPoints_calc;
+    QVector<QPointF> hexPoints_visible;
 
     void setNewLastPoint();
 
@@ -26,10 +27,10 @@ private:
     void createLeftDownElement(double addedX, double addedY);
 
     void createAllPoints(QVector<unsigned short> anglePoints, double addToX, double addToY);
-    QPointF createPoint(unsigned short anglePoint, double addToX, double addToY);
+    void createPoint(unsigned short anglePoint, double addToX, double addToY);
 
 public:
-    TowerRangeAttack(unsigned int r, QPointF hexPosition);
+    TowerRangeAttack(unsigned int r, QPointF hexPosition_);
 };
 
 #endif // TOWERRANGEATTACK_H
