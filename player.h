@@ -21,6 +21,9 @@ public:
     int getHp() { return hp; }
 
     void updateUpgradeAndBuyButtons();
+    void checkIfPlayerIsDead();
+    void endGame();
+    void resetPlayer();
 
 public slots:
     void increaseMoney(unsigned int increased);

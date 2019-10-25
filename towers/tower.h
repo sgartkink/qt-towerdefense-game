@@ -2,6 +2,7 @@
 #define TOWER_H
 
 #include <QObject>
+#include <QVector>
 
 #include "towers_prices.h"
 #include "bullets/bullet.h"
@@ -20,13 +21,15 @@ private:
 
     unsigned int attackRange;
     Hex * parentHex;
+    TowerRangeAttack * towerRangeAttack;
+    QVector<TowerSquareObject *> vectorTowerSquareObjects;
 
     void createNewTowerSquare();
 
 protected:
     short currentLevel = 1;
     QVector<unsigned int> vectorDamage;
-    TowerRangeAttack * towerRangeAttack;
+
 
     void setBulletPosAndAddToScene(Bullet * bullet);
 
@@ -45,6 +48,8 @@ public:
     void setTowerRangeAttackVisibility(bool visible) { towerRangeAttack->setVisible(visible); }
 
     virtual void enemyTargeted(Enemy *e) = 0;
+
+    void resetTower();
 
 public slots:
     void increaseLevelAndReducePlayerMoney(unsigned short vectorTowerPrices_NR);

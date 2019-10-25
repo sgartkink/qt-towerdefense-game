@@ -74,3 +74,9 @@ void Hex::changeHexBrushColor(Qt::GlobalColor color)
     brush.setColor(color);
     setBrush(brush);
 }
+
+void Hex::resetHex()
+{
+    tower = nullptr;
+
+}

@@ -55,7 +55,8 @@ SOURCES += \
     widgetwaitforclickhex.cpp \
     widgetwithtoweroptions.cpp \
     hpbarenemyframe.cpp \
-    hpbarenemyfill.cpp
+    hpbarenemyfill.cpp \
+    widgetendgame.cpp
 
 HEADERS += \
     hex.h \
@@ -89,7 +90,8 @@ HEADERS += \
     widgetwaitforclickhex.h \
     widgetwithtoweroptions.h \
     hpbarenemyframe.h \
-    hpbarenemyfill.h
+    hpbarenemyfill.h \
+    widgetendgame.h
 
 FORMS +=
 

@@ -46,6 +46,8 @@ public:
     void changeOpacity(qreal opacity) { setOpacity(opacity); }
 
     void changeHexBrushColor(Qt::GlobalColor color);
+
+    void resetHex();
 };
 
 #endif // HEX_H

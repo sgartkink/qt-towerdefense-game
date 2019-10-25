@@ -81,16 +81,16 @@ void Map::checkIfActiveHexHasTowerOrPath()
     if (activeHex->getTower())
         changeOpacityAndRightInterface();
     else if (!activeHex->hasPath())
-        game->interfaceOnTheRightSide->setInterface(INTERFACE_WITH_TOWER_OPTIONS_NR);
+        game->interfaceOnTheRightSide->setWidget(WIDGET_WITH_TOWER_OPTIONS_NR);
     else
-        game->interfaceOnTheRightSide->setInterface(INTERFACE_WAIT_FOR_CLICK_HEX_NR);
+        game->interfaceOnTheRightSide->setWidget(WIDGET_WAIT_FOR_CLICK_HEX_NR);
 }
 
 void Map::changeOpacityAndRightInterface()
 {
     changeOpacityHexesOutOfReach(OPACITY_OUT_OF_REACH, activeHex);
     game->interfaceOnTheRightSide->getWidgetTowerDetails()->setActiveTower(activeHex->getTower());
-    game->interfaceOnTheRightSide->setInterface(INTERFACE_TOWER_DETAILS);
+    game->interfaceOnTheRightSide->setWidget(WIDGET_TOWER_DETAILS_NR);
 }
 
 void Map::createAndAddEffectToScene()
@@ -124,7 +124,11 @@ void Map::changeOpacityHexesOutOfReach(qreal opacity, Hex *hex)
 
 void Map::mousePressEvent(QMouseEvent *event)
 {
-    game->interfaceOnTheRightSide->setInterface(INTERFACE_WAIT_FOR_CLICK_HEX_NR);
+    if (newLevelEnemies->getIsGame())
+        game->interfaceOnTheRightSide->setWidget(WIDGET_WAIT_FOR_CLICK_HEX_NR);
+    else
+        game->interfaceOnTheRightSide->setWidget(WIDGET_END_GAME_NR);
+
     if (activeHex)
     {
         if (activeHex->getTower())
@@ -175,7 +179,7 @@ void Map::createTower(int nr)
         changeOpacityHexesOutOfReach(OPACITY_OUT_OF_REACH, activeHex);
 
         game->interfaceOnTheRightSide->getWidgetTowerDetails()->setActiveTower(activeHex->getTower());
-        game->interfaceOnTheRightSide->setInterface(INTERFACE_TOWER_DETAILS);
+        game->interfaceOnTheRightSide->setWidget(WIDGET_TOWER_DETAILS_NR);
     }
 }
 
@@ -213,6 +217,17 @@ void Map::startCollisionTimer()
 void Map::stopCollistionTimer()
 {
     collisionTimer->stop();
+}
+
+void Map::resetMap()
+{
+    for (auto it = vectorAllTowers.begin(); it != vectorAllTowers.end(); ++it)
+    {
+        (*it)->getParentHex()->resetHex();
+        (*it)->resetTower();
+    }
+    vectorAllTowers.resize(0);
+    newLevelEnemies->setIsGameTrue();
 }
 
 Map::~Map()

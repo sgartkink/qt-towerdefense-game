@@ -6,28 +6,28 @@ extern Game * game;
 
 NewLevelEnemies::NewLevelEnemies()
 {
-    vectorEnemies.resize(10);
+    vectorEnemiesAmount.resize(MAX_LEVELS);
 
     createAllLevels();
 }
 
 void NewLevelEnemies::createAllLevels()
 {
-    vectorEnemies[0].push_back(10); //enemies
-    vectorEnemies[0].push_back(250); //frequency
+    vectorEnemiesAmount[0].push_back(2); //enemies
+    vectorEnemiesAmount[0].push_back(250); //frequency
 
-    vectorEnemies[1].push_back(50);
-    vectorEnemies[1].push_back(500);
+    vectorEnemiesAmount[1].push_back(2);
+    vectorEnemiesAmount[1].push_back(250);
 }
 
 void NewLevelEnemies::startNewLevel()
 {
-    enemiesLeft = vectorEnemies[game->getLevel()-1][NR_ENEMIES_IN_VECTOR];
+    enemiesLeft = vectorEnemiesAmount[game->getLevel()-1][NR_ENEMIES_IN_VECTOR];
     enemiesCount = enemiesLeft;
-    vectorAllEnemies.resize(0);
+    vectorEnemiesOnMap.resize(0);
 
     connect(timerCreateNewEnemy, SIGNAL(timeout()), this, SLOT(createNewEnemy()));
-    timerCreateNewEnemy->start(vectorEnemies[game->getLevel()-1][NR_FREQUENCY_CREATING_ENEMIES]);
+    timerCreateNewEnemy->start(vectorEnemiesAmount[game->getLevel()-1][NR_FREQUENCY_CREATING_ENEMIES]);
 
     game->interfaceOnBottom->setButtonStartGameEnabled(false);
     game->map->startCollisionTimer();
@@ -38,7 +38,7 @@ void NewLevelEnemies::createNewEnemy()
 {
     Enemy * enemy = new Enemy();
     game->map->getScene()->addItem(enemy);
-    vectorAllEnemies.push_back(enemy);
+    vectorEnemiesOnMap.push_back(enemy);
 
     enemiesCount--;
     checkIfAllEnemiesAreCreated();
@@ -79,11 +79,20 @@ void NewLevelEnemies::checkIfAllEnemiesAreKilled()
 void NewLevelEnemies::endLevel()
 {
     game->interfaceOnBottom->setButtonStartGameEnabled(true);
-    game->increaseLevelAndUpdateInterfaces();
     game->map->stopCollistionTimer();
 
-    vectorAllEnemies[0]->resetEnemyCount();
-    for (auto it = vectorAllEnemies.begin(); it != vectorAllEnemies.end(); ++it)
+    vectorEnemiesOnMap[0]->resetEnemyCount();
+    for (auto it = vectorEnemiesOnMap.begin(); it != vectorEnemiesOnMap.end(); ++it)
         delete (*it);
-    vectorAllEnemies.resize(0);
+    vectorEnemiesOnMap.resize(0);
+
+    if (game->getLevel() == MAX_LEVELS)
+    {
+        game->interfaceOnTheRightSide->getWidgetEndGame()->setIfPlayerWon(true);
+        game->interfaceOnBottom->setButtonStartGameEnabled(false);
+        game->interfaceOnTheRightSide->setWidget(WIDGET_END_GAME_NR);
+        isGame = false;
+    }
+    else
+        game->increaseLevelAndUpdateInterfaces();
 }

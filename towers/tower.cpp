@@ -18,7 +18,7 @@ void Tower::createNewTowerSquare()
     towerSquareObject->setPos(towerPosition.x() - ((currentLevel - 1)*4) + HEX_SIZE/2 - TOWER_SIZE/2,
                               towerPosition.y() - ((currentLevel - 1)*4) + HEX_SIZE/2 - TOWER_SIZE/2);
     towerSquareObject->setRect(0, 0, TOWER_SIZE + ((currentLevel - 1)*8), TOWER_SIZE + ((currentLevel - 1)*8));
-
+    vectorTowerSquareObjects.push_back(towerSquareObject);
     game->map->getScene()->addItem(towerSquareObject);
 }
 
@@ -34,4 +34,10 @@ void Tower::increaseLevelAndReducePlayerMoney(unsigned short vectorTowerPrices_N
     game->player->decreaseMoney(getPrice(vectorTowerPrices_NR));
     currentLevel++;
     createNewTowerSquare();
+}
+
+void Tower::resetTower()
+{
+    for (auto it = vectorTowerSquareObjects.begin(); it != vectorTowerSquareObjects.end(); ++it)
+        game->map->getScene()->removeItem(*it);
 }

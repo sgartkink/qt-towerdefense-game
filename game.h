@@ -31,6 +31,8 @@ public:
     void setAllConnects();
     void configureInterfaces();
     void configurePathForEnemy();
+
+    void resetLevel() { level = 1; }
 };
 
 #endif // GAME_H

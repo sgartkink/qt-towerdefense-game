@@ -62,6 +62,8 @@ public:
     void startCollisionTimer();
     void stopCollistionTimer();
 
+    void resetMap();
+
 public slots:
     void createTower(int nr);
     void checkCollidings();
